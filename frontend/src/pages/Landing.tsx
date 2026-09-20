@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import Terminal from '../components/apps/Terminal'
 import ImageViewer from '../components/apps/ImageViewer'
 import MarkdownViewer from '../components/apps/MarkdownViewer'
+import ProfileImage from "../assets/profile-image.png"
 import type { BringToFront, WindowZIndexes } from '../types/window'
 
 interface LandingProps {
@@ -172,6 +173,7 @@ function Landing({ windowZIndexes, bringToFront }: LandingProps) {
                 initialY={70}
                 zIndex={windowZIndexes.imageViewer}
                 onFocus={() => bringToFront('imageViewer')}
+                image={ProfileImage}
                 className="sm:max-w-[100%] md:max-w-[100%] lg:max-w-[600px]"
             />
 

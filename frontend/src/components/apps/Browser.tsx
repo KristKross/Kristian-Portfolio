@@ -1,4 +1,13 @@
 import type { ReactNode } from "react";
+import {
+    ArrowLeft,
+    ArrowRight,
+    FileText,
+    Plus,
+    RotateCw,
+    Star,
+    X,
+} from "lucide-react";
 import WindowsControl from "../desktop/WindowControls";
 import useDraggable from "../../hooks/useDraggable";
 
@@ -14,18 +23,7 @@ interface BrowserProps {
     onClose?: () => void;
 }
 
-const icon = (name: string) =>
-    `https://unpkg.com/lucide-static@latest/icons/${name}.svg`;
-
 const buttonClass = "inline-flex cursor-pointer items-center justify-center border-0 bg-transparent p-[3px]";
-
-const iconClass = "h-4 w-4 invert";
-
-const browserButtons = [
-    "arrow-left",
-    "arrow-right",
-    "rotate-cw",
-] as const;
 
 function Browser({
     tab,
@@ -72,13 +70,21 @@ function Browser({
                         {tab}
                     </span>
 
-                    <button type="button" aria-label="Close tab" className={buttonClass}>
-                        <img src={icon("x")} alt="" className={iconClass} />
+                    <button
+                        type="button"
+                        aria-label="Close tab"
+                        className={buttonClass}
+                    >
+                        <X className="h-4 w-4 text-white" />
                     </button>
                 </div>
 
-                <button type="button" aria-label="New tab" className={buttonClass}>
-                    <img src={icon("plus")} alt="" className={iconClass} />
+                <button
+                    type="button"
+                    aria-label="New tab"
+                    className={buttonClass}
+                >
+                    <Plus className="h-4 w-4 text-white" />
                 </button>
 
                 <div className="ml-auto">
@@ -89,25 +95,52 @@ function Browser({
             {/* Address Bar */}
             <div className="flex shrink-0 items-center gap-2.5 bg-[#242424] p-2.5">
                 <div className="flex gap-2">
-                    {browserButtons.map((name) => (
-                        <button key={name} type="button" aria-label={name} className={buttonClass}>
-                            <img src={icon(name)} alt="" className={iconClass} />
-                        </button>
-                    ))}
+                    <button
+                        type="button"
+                        aria-label="Back"
+                        className={buttonClass}
+                    >
+                        <ArrowLeft className="h-4 w-4 text-white" />
+                    </button>
+
+                    <button
+                        type="button"
+                        aria-label="Forward"
+                        className={buttonClass}
+                    >
+                        <ArrowRight className="h-4 w-4 text-white" />
+                    </button>
+
+                    <button
+                        type="button"
+                        aria-label="Reload"
+                        className={buttonClass}
+                    >
+                        <RotateCw className="h-4 w-4 text-white" />
+                    </button>
                 </div>
 
                 <div className="flex h-[34px] min-w-0 flex-1 items-center gap-2 rounded-[18px] border border-[#454040] bg-[#454040] px-[11px] text-[13px] text-white">
-                    <img src={icon("file-text")} alt="" className={iconClass} />
+                    <FileText className="h-4 w-4 shrink-0 text-white" />
 
-                    <a href={searchBar} target="_blank" rel="noreferrer" className="flex min-w-0 flex-1 items-center rounded-md px-2 py-1 text-gray-300 transition-colors hover:bg-[#505050] hover:text-white">
+                    <a
+                        href={searchBar}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex min-w-0 flex-1 items-center rounded-md px-2 py-1 text-gray-300 transition-colors hover:bg-[#505050] hover:text-white"
+                    >
                         <span className="overflow-hidden text-ellipsis whitespace-nowrap hover:underline">
                             {searchBar}
                         </span>
                     </a>
                 </div>
 
-                <button type="button" aria-label="Bookmark" className={buttonClass}>
-                    <img src={icon("star")} alt="" className={iconClass} />
+                <button
+                    type="button"
+                    aria-label="Bookmark"
+                    className={buttonClass}
+                >
+                    <Star className="h-4 w-4 text-white" />
                 </button>
             </div>
 

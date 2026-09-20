@@ -91,10 +91,8 @@ function App() {
     return (
         <div className="relative min-h-screen isolate">
             <Wallpaper />
-
             <DesktopDecor />
             <Navbar />
-
             <div className="px-4 sm:px-6 lg:px-20">
                 <div className="relative isolate min-h-fit max-h-[calc(100vh)]">
                     <Landing

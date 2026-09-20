@@ -1,9 +1,8 @@
 import WindowsControl from "../desktop/WindowControls";
 import useDraggable from "../../hooks/useDraggable";
-import ProfileImage from "../../assets/profile-image.png"
 
 interface ImageViewerProps {
-    y?: string;
+    image: string;
     className?: string;
     initialX?: number;
     initialY?: number;
@@ -12,6 +11,7 @@ interface ImageViewerProps {
 }
 
 function ImageViewer({ 
+    image,
     className,
     initialX,
     initialY,
@@ -63,7 +63,7 @@ function ImageViewer({
 
             {/* Main Content Area */}
             <div className="flex min-h-[500px] items-center justify-center overflow-hidden bg-gray-900 p-8">
-                <img src={ProfileImage} alt="Profile" className="max-h-[calc(100vh-200px)] max-w-full object-contain" />
+                <img src={image} alt="Profile" className="max-h-[calc(100vh-200px)] max-w-full object-contain" />
             </div>
         </div>
     );

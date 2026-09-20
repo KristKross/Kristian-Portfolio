@@ -1,5 +1,14 @@
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import {
+    BatteryFull,
+    Bell,
+    Globe,
+    Lock,
+    Menu,
+    Power,
+    Volume2,
+    X,
+} from "lucide-react";
 
 const sectionLinks = [
     { label: "Landing", id: "landing" },
@@ -7,36 +16,6 @@ const sectionLinks = [
     { label: "Projects", id: "projects" },
     { label: "Skills", id: "skills" },
     { label: "Contact", id: "contact" },
-];
-
-const actionButtons = [
-    {
-        label: "Internet",
-        src: "https://unpkg.com/lucide-static@latest/icons/globe.svg",
-    },
-    {
-        label: "Volume",
-        src: "https://unpkg.com/lucide-static@latest/icons/volume-2.svg",
-    },
-    {
-        label: "Bell",
-        src: "https://unpkg.com/lucide-static@latest/icons/bell.svg",
-    },
-    {
-        label: "Battery",
-        src: "https://unpkg.com/lucide-static@latest/icons/battery-full.svg",
-    },
-];
-
-const utilityButtons = [
-    {
-        label: "Lock",
-        src: "https://unpkg.com/lucide-static@latest/icons/lock.svg",
-    },
-    {
-        label: "Power",
-        src: "https://unpkg.com/lucide-static@latest/icons/power.svg",
-    },
 ];
 
 function Clock() {
@@ -67,11 +46,21 @@ function Clock() {
 function StatusIcons() {
     return (
         <div className="hidden items-center lg:flex">
-            {actionButtons.map(({ label, src }) => (
-                <button key={label} type="button" aria-label={label} className="flex h-9 w-9 items-center justify-center opacity-90 transition-opacity hover:opacity-100 focus:outline-none">
-                    <img src={src} alt="" aria-hidden="true" className="h-[21px] w-[21px] object-contain invert" />
-                </button>
-            ))}
+            <button type="button" aria-label="Internet" className="flex h-9 w-9 items-center justify-center opacity-90 transition-opacity hover:opacity-100 focus:outline-none">
+                <Globe className="h-[21px] w-[21px]" />
+            </button>
+
+            <button type="button" aria-label="Volume" className="flex h-9 w-9 items-center justify-center opacity-90 transition-opacity hover:opacity-100 focus:outline-none">
+                <Volume2 className="h-[21px] w-[21px]" />
+            </button>
+
+            <button type="button" aria-label="Notifications" className="flex h-9 w-9 items-center justify-center opacity-90 transition-opacity hover:opacity-100 focus:outline-none">
+                <Bell className="h-[21px] w-[21px]" />
+            </button>
+
+            <button type="button" aria-label="Battery" className="flex h-9 w-9 items-center justify-center opacity-90 transition-opacity hover:opacity-100 focus:outline-none">
+                <BatteryFull className="h-[21px] w-[21px]" />
+            </button>
         </div>
     );
 }
@@ -79,11 +68,13 @@ function StatusIcons() {
 function UtilityButtons() {
     return (
         <div className="flex items-center">
-            {utilityButtons.map(({ label, src }) => (
-                <button key={label} type="button" aria-label={label} className="flex h-9 w-9 items-center justify-center opacity-90 transition-opacity hover:opacity-100 focus:outline-none">
-                    <img src={src} alt="" aria-hidden="true" className="h-[21px] w-[21px] object-contain invert" />
-                </button>
-            ))}
+            <button type="button" aria-label="Lock" className="flex h-9 w-9 items-center justify-center opacity-90 transition-opacity hover:opacity-100 focus:outline-none">
+                <Lock className="h-[21px] w-[21px]" />
+            </button>
+
+            <button type="button" aria-label="Power" className="flex h-9 w-9 items-center justify-center opacity-90 transition-opacity hover:opacity-100 focus:outline-none">
+                <Power className="h-[21px] w-[21px]" />
+            </button>
         </div>
     );
 }

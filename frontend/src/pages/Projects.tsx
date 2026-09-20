@@ -1,9 +1,7 @@
 import { useState } from 'react'
-
 import Terminal from '../components/apps/Terminal'
 import FileManager, { type Project } from '../components/apps/FileManager'
 import ProjectWindow from '../components/content/ProjectWindow'
-
 import type { BringToFront, WindowZIndexes } from '../types/window'
 
 interface ProjectsProps {

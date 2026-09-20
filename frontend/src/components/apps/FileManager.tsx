@@ -1,6 +1,6 @@
 import WindowsControl from '../desktop/WindowControls'
 import useDraggable from '../../hooks/useDraggable'
-import folderIcon from '../../assets/icons/folder.svg'
+import { Folder } from "lucide-react";
 
 export interface Project {
     name: string
@@ -193,11 +193,7 @@ function FileManager({
                                     className="group flex cursor-pointer flex-col items-center justify-center rounded-xl border border-transparent p-3 text-center transition-all duration-200 hover:border-[#4FC1E9]/60 hover:bg-[#131b23] focus:border-[#4FC1E9]/60 focus:bg-[#131b23] focus:outline-none"
                                 >
                                     <div className="relative mb-3 flex h-16 w-12 items-center justify-center">
-                                        <img
-                                            src={folderIcon}
-                                            alt=""
-                                            className="h-14 w-14 filter invert opacity-90 transition group-hover:opacity-100"
-                                        />
+                                        <Folder className="h-14 w-14 text-[#4FC1E9] opacity-90 transition group-hover:opacity-100" />
                                     </div>
 
                                     <div className="flex min-h-[2rem] w-full max-w-[110px] items-center justify-center text-center text-xs font-medium leading-4 text-[#E6E6E6] transition group-hover:text-[#4FC1E9]">
