@@ -81,7 +81,7 @@ function MarkdownViewer({
             </div>
 
             {/* Content */}
-            <div className="font-['JetBrains_Mono'] bg-white p-6 h-full flex-1 text-gray-900 text-sm lg:text-base">
+            <div className="font-['JetBrains_Mono'] bg-white p-6 py-12 h-full flex-1 text-gray-900 text-sm lg:text-base">
                 {text}
             </div>
         </div>

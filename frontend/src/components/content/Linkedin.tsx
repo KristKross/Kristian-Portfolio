@@ -64,11 +64,20 @@ function Linkedin({
                             </p>
 
                             <div className="mt-4 flex flex-wrap gap-2">
-                                <button type="button" className="rounded-full bg-[#0a66c2] px-5 py-2 text-sm font-semibold text-white">
+                                <a
+                                    href={linkedinLink}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="rounded-full border-2 border-[#0a66c2] bg-[#0a66c2] px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-white hover:text-[#0a66c2]"
+                                >
                                     Connect
-                                </button>
-
-                                <a href="mailto:hello@example.com" className="rounded-full border border-[#0a66c2] px-5 py-2 text-sm font-semibold text-[#0a66c2]">
+                                </a>
+                                <a
+                                    href={linkedinLink}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="rounded-full border border-[#0a66c2] px-5 py-2 text-sm font-semibold text-[#0a66c2] transition-colors hover:bg-[#0a66c2] hover:text-white"
+                                >
                                     Message
                                 </a>
                             </div>

@@ -145,7 +145,7 @@ function Browser({
             </div>
 
             {/* Website Body */}
-            <main className="min-h-0 flex-1 overflow-y-auto overflow-x-hidden">
+            <main className="font-['JetBrains_Mono'] min-h-0 flex-1 overflow-y-auto overflow-x-hidden">
                 {children}
             </main>
         </div>

@@ -1,5 +1,6 @@
 import WindowsControl from "../desktop/WindowControls"
 import useDraggable from "../../hooks/useDraggable"
+import { Reply } from "lucide-react";
 
 interface MailProps {
     className?: string;
@@ -99,7 +100,7 @@ function Mail({
 						<article className="flex-1 p-6 text-sm leading-6 text-gray-300">
 							<div className="mb-6 space-y-1 border-b border-[#2a2a2a] pb-5 text-xs text-gray-400">
 								<div><span className="inline-block w-20">To:</span> You</div>
-								<div><span className="inline-block w-20">From:</span> Kristian Demonteverde &lt;kristian@email.com&gt;</div>
+								<div><span className="inline-block w-20">From:</span> Kristian Demonteverde &lt;kristian.k.demonteverde@gmail.com&gt;</div>
 								<div><span className="inline-block w-20">Subject:</span> Let's work together!</div>
 								<div><span className="inline-block w-20">Date:</span> September 17, 2026 · 20:42</div>
 							</div>
@@ -108,9 +109,13 @@ function Mail({
 							<p className="mt-4">Best,<br />Kristian</p>
 						</article>
 						<div className="flex gap-5 border-t border-[#2a2a2a] px-6 py-4 text-sm text-[#4FC1E9]">
-							<button className="rounded px-2 py-1 transition hover:bg-[#1d4f68] hover:text-white focus-visible:bg-[#1d4f68] focus-visible:text-white focus-visible:outline-none">↩ Reply</button>
-							<button className="rounded px-2 py-1 transition hover:bg-[#1d4f68] hover:text-white focus-visible:bg-[#1d4f68] focus-visible:text-white focus-visible:outline-none">→ Forward</button>
-							<button className="rounded px-2 py-1 transition hover:bg-[#1d4f68] hover:text-white focus-visible:bg-[#1d4f68] focus-visible:text-white focus-visible:outline-none">⋮ More</button>
+							<a
+								href="mailto:kristian.k.demonteverde@gmail.com?subject=Re:%20Let's%20work%20together!"
+								className="inline-flex items-center gap-2 rounded px-2 py-1 text-[#4FC1E9] transition hover:bg-[#1d4f68] hover:text-white focus-visible:bg-[#1d4f68] focus-visible:text-white focus-visible:outline-none"
+							>
+								<Reply className="h-4 w-4" />
+								Reply
+							</a>
 						</div>
 					</main>
 				</div>
