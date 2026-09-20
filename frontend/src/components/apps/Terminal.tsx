@@ -29,7 +29,6 @@ function Terminal({
     zIndex,
     onFocus,
 }: TerminalProps) {
-
     const terminalRef = useRef<HTMLDivElement>(null);
 
     const {
@@ -48,19 +47,21 @@ function Terminal({
                 draggableRef.current = element;
             }}
             onPointerDown={onFocus}
-            className={`window-pop-in lg:flex relative flex-col lg:absolute lg:my-4 bg-[#202837] p-4 rounded-lg shadow-lg text-white font-mono text-xs sm:text-sm lg:text-base w-full max-w-2xl ${className ?? ""}`}
+            className={`window-pop-in relative flex w-full max-w-2xl flex-col rounded-lg bg-[#202837] p-4 font-mono text-xs text-white shadow-lg sm:text-sm lg:absolute lg:my-4 lg:flex lg:text-base ${className ?? ""}`}
             style={{
-                ...(isDesktop && { left: position.x, top: position.y }),
+                ...(isDesktop && {
+                    left: position.x,
+                    top: position.y,
+                }),
                 zIndex,
             }}
         >
-
             {/* Title bar */}
             <div
                 onPointerDown={handlePointerDown}
                 onPointerMove={handlePointerMove}
                 onPointerUp={handlePointerUp}
-                className="terminal-titlebar relative flex flex-row items-center mb-10 cursor-default lg:cursor-grab select-none"
+                className="terminal-titlebar relative mb-10 flex flex-row select-none cursor-default lg:cursor-grab"
             >
                 <span className="absolute left-1/2 -translate-x-1/2">
                     {title}
@@ -73,18 +74,20 @@ function Terminal({
 
             {/* Terminal content */}
             <div className="terminal-content">
-
                 {lines.map((line, index) => (
                     <div key={index} className="terminal-line">
-
-                        <div className="terminal-input">
-                            <span className="text-[#5DADE2]">
+                        <div className="terminal-input flex items-baseline">
+                            <span className="shrink-0 text-[#5DADE2]">
                                 {prompt}
                             </span>
 
-                            <span> </span>
+                            <span className="shrink-0">
+                                {" "}
+                            </span>
 
-                            {line.input}
+                            <div className="min-w-0 ml-2">
+                                {line.input}
+                            </div>
                         </div>
 
                         {line.output && (
@@ -92,18 +95,18 @@ function Terminal({
                                 {line.output}
                             </div>
                         )}
-
                     </div>
                 ))}
 
-                <div className="terminal-prompt">
+                <div className="terminal-prompt flex items-baseline">
                     <span className="text-[#5DADE2]">
                         {prompt}
                     </span>
 
-                    <span className="terminal-cursor"> █</span>
+                    <span className="terminal-cursor">
+                        {" "}█
+                    </span>
                 </div>
-
             </div>
         </div>
     );

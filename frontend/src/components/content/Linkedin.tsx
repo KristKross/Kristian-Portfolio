@@ -1,5 +1,7 @@
 import Browser from "../apps/Browser";
 import LinkedinIcon from "../../assets/icons/linkedin-icon.png";
+import ProfileImage from "../../assets/profile-image.png"
+import LinkedinBanner from "../../assets/linkedin-banner.png"
 
 interface LinkedinProps {
     className?: string;
@@ -42,13 +44,13 @@ function Linkedin({
                 </nav>
 
                 {/* Profile */}
-                <div className="mx-auto max-w-6xl px-4 pb-4 sm:px-8 lg:px-20">
+                <div className="mx-auto max-w-6xl px-4 pb-4 mt-5 sm:px-8 lg:px-20">
                     <section className="overflow-hidden rounded-lg border border-[#d0d3d6] bg-white">
-                        <div className="h-32 bg-gradient-to-r from-[#0a66c2] via-[#378fe0] to-[#70b5f9] sm:h-40" />
+                        <img src={LinkedinBanner} alt="banner" className="w-full" />
 
                         <div className="px-5 pb-6 sm:px-6">
                             <div className="-mt-16 flex h-32 w-32 items-center justify-center rounded-full border-4 border-white bg-white sm:-mt-20 sm:h-40 sm:w-40">
-                                <img src={LinkedinIcon} alt="LinkedIn" className="h-full w-full rounded-full object-contain" />
+                                <img src={ProfileImage} alt="Profile" className="h-full w-full rounded-full" />
                             </div>
 
                             <h1 className="mt-3 text-2xl font-semibold">
@@ -56,7 +58,7 @@ function Linkedin({
                             </h1>
 
                             <p className="mt-1 text-base">
-                                Software Developer
+                                Software Developer  
                             </p>
 
                             <p className="mt-2 text-sm text-[#666]">
