@@ -46,9 +46,9 @@ const skillGroups = [
 
 function SystemMonitor({
     className,
-    initialX = 0,
-    initialY = 0,
-    zIndex = 1,
+    initialX,
+    initialY,
+    zIndex,
     onFocus,
 }: SystemMonitorProps) {
     const totalSkills = skillGroups.reduce((total, group) => total + group.skills.length, 0)

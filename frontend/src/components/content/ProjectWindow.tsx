@@ -144,7 +144,7 @@ function ProjectWindow({
                             <a href={project.link} target="_blank" rel="noreferrer"
                                 className="shrink-0 rounded-md bg-[#4FC1E9] px-3 py-2 text-center text-xs font-semibold text-[#10151a] transition hover:brightness-110"
                             >
-                                Open Project ↗
+                                Open Project
                             </a>
                         </div>
                     </section>

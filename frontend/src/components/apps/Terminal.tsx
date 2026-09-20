@@ -42,7 +42,6 @@ function Terminal({
     title,
     lines = [],
     prompt = "kristian@portfolio:~$",
-    showCursor = true,
     className,
     initialX = 100,
     initialY = 100,
@@ -138,7 +137,7 @@ function Terminal({
                         {prompt}
                     </span>
 
-                    {showCursor && <span className="terminal-cursor"> █</span>}
+                    <span className="terminal-cursor"> █</span>
                 </div>
 
             </div>

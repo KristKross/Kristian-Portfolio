@@ -26,31 +26,30 @@ export const exampleProjects: Project[] = [
         name: 'portfolio-web',
         description:
             'A personal portfolio built with React and TypeScript to showcase projects, skills, and experience.',
-        demo: 'https://www.youtube.com/watch?v=hLySDcwW2vo&pp=0gcJCSQMAYcqIYzv',
         tech: ['React', 'TypeScript', 'Tailwind CSS', 'Vite'],
-        link: 'https://github.com/yourusername/portfolio-web',
+        link: '#',
     },
     {
         name: 'task-manager',
         description:
             'A productivity app with task tracking, filtering, and project organization for daily planning.',
         tech: ['React', 'Node.js', 'MongoDB'],
-        link: 'https://github.com/yourusername/task-manager',
+        link: '#',
     },
     {
         name: 'analytics-dashboard',
         description:
             'A data-heavy dashboard for visualizing metrics, activity trends, and performance summaries.',
         tech: ['Next.js', 'TypeScript', 'PostgreSQL'],
-        link: 'https://github.com/yourusername/analytics-dashboard',
+        link: '#',
     },
 ]
 
 function FileManager({
-    className = '',
-    initialX = 0,
-    initialY = 0,
-    zIndex = 1,
+    className,
+    initialX,
+    initialY,
+    zIndex,
     onFocus,
     onOpenProject,
     selectedProject,
