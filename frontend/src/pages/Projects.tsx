@@ -47,9 +47,9 @@ function Projects({ windowZIndexes, bringToFront }: ProjectsProps) {
                     title="kristian@portfolio: ~"
                     lines={[
                         {
-                            input: [
-                                { text: './projects', className: 'text-white' },
-                            ],
+                            input: (
+                                <span className="text-white">./projects</span>
+                            ),
                             output: (
                                 <div className="mb-5 text-[#9A9A9A]">
                                     <span className="text-[#6F9D62]">
@@ -57,7 +57,7 @@ function Projects({ windowZIndexes, bringToFront }: ProjectsProps) {
                                     </span>{" "}
                                     Opening file manager ...
                                 </div>
-                            )
+                            ),
                         },
                     ]}
                     prompt="kristian@portfolio:~$"

@@ -2,14 +2,9 @@ import { useRef, type ReactNode } from "react";
 import useDraggable from "../../hooks/useDraggable";
 import WindowsControl from "../desktop/WindowControls";
 
-interface TerminalSegment {
-    text: string;
-    className?: string;
-}
-
 interface TerminalLine {
-    input: TerminalSegment[];
-    output?: ReactNode | TerminalSegment[];
+    input: ReactNode;
+    output?: ReactNode;
 }
 
 interface TerminalProps {
@@ -24,28 +19,14 @@ interface TerminalProps {
     onFocus?: () => void;
 }
 
-function isTerminalSegmentArray(
-    output: ReactNode | TerminalSegment[],
-): output is TerminalSegment[] {
-    return (
-        Array.isArray(output) &&
-        output.every(
-            (segment) =>
-                typeof segment === "object" &&
-                segment !== null &&
-                "text" in segment,
-        )
-    );
-}
-
 function Terminal({
     title,
     lines = [],
     prompt = "kristian@portfolio:~$",
     className,
-    initialX = 100,
-    initialY = 100,
-    zIndex = 1,
+    initialX,
+    initialY,
+    zIndex,
     onFocus,
 }: TerminalProps) {
 
@@ -84,6 +65,7 @@ function Terminal({
                 <span className="absolute left-1/2 -translate-x-1/2">
                     {title}
                 </span>
+
                 <div className="ml-auto flex items-center gap-2">
                     <WindowsControl />
                 </div>
@@ -102,30 +84,12 @@ function Terminal({
 
                             <span> </span>
 
-                            {line.input.map((segment, segmentIndex) => (
-                                <span
-                                    key={segmentIndex}
-                                    className={segment.className}
-                                >
-                                    {segment.text}
-                                </span>
-                            ))}
+                            {line.input}
                         </div>
 
                         {line.output && (
                             <div className="terminal-output mb-5">
-                                {isTerminalSegmentArray(line.output)
-                                    ? line.output.map(
-                                          (segment, segmentIndex) => (
-                                              <span
-                                                  key={segmentIndex}
-                                                  className={segment.className}
-                                              >
-                                                  {segment.text}
-                                              </span>
-                                          )
-                                      )
-                                    : line.output}
+                                {line.output}
                             </div>
                         )}
 

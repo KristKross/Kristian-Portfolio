@@ -1,7 +1,7 @@
+import { useEffect, useRef, useState } from "react";
 import Terminal from "../components/apps/Terminal";
 import MarkdownViewer from "../components/apps/MarkdownViewer";
 import type { BringToFront, WindowZIndexes } from "../types/window";
-import { useSectionAppearance } from "../hooks/useSectionAppearance";
 
 interface AboutProps {
     windowZIndexes: WindowZIndexes;
@@ -72,7 +72,44 @@ const AboutContent = (
 );
 
 function About({ windowZIndexes, bringToFront }: AboutProps) {
-    const { sectionRef, visible } = useSectionAppearance([300, 1000]);
+    const sectionRef = useRef<HTMLElement>(null);
+
+    const [showTerminal, setShowTerminal] = useState(false);
+    const [showMarkdown, setShowMarkdown] = useState(false);
+
+    useEffect(() => {
+        const section = sectionRef.current;
+
+        if (!section) return;
+
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (!entry.isIntersecting) return;
+
+                const terminalTimer = setTimeout(() => {
+                    setShowTerminal(true);
+                }, 300);
+
+                const markdownTimer = setTimeout(() => {
+                    setShowMarkdown(true);
+                }, 1000);
+
+                observer.disconnect();
+
+                return () => {
+                    clearTimeout(terminalTimer);
+                    clearTimeout(markdownTimer);
+                };
+            },
+            {
+                threshold: 0.2,
+            }
+        );
+
+        observer.observe(section);
+
+        return () => observer.disconnect();
+    }, []);
 
     return (
         <section
@@ -80,21 +117,21 @@ function About({ windowZIndexes, bringToFront }: AboutProps) {
             id="about"
             className="relative mt-8 flex flex-col items-center justify-center gap-6 px-2 min-h-screen"
         >
-            {visible[0] && (
+            {showTerminal && (
                 <Terminal
                     title="kristian@portfolio: ~"
                     lines={[
                         {
-                            input: [
-                                {
-                                    text: "xdg-open",
-                                    className: "text-xs sm:text-sm md:text-base text-[#4FC1E9]",
-                                },
-                                {
-                                    text: " about.md",
-                                    className: "text-xs sm:text-sm md:text-base text-white",
-                                },
-                            ],
+                            input: (
+                                <div className="text-xs sm:text-sm md:text-base">
+                                    <span className="text-[#4FC1E9]">
+                                        xdg-open
+                                    </span>
+                                    <span className="text-white">
+                                        {" "}about.md
+                                    </span>
+                                </div>
+                            ),
                             output: (
                                 <div className="mb-5 text-[#9A9A9A]">
                                     <span className="text-[#6F9D62]">
@@ -102,7 +139,7 @@ function About({ windowZIndexes, bringToFront }: AboutProps) {
                                     </span>{" "}
                                     Opening about.md ...
                                 </div>
-                            )
+                            ),
                         },
                     ]}
                     prompt="kristian@portfolio:~$"
@@ -114,7 +151,7 @@ function About({ windowZIndexes, bringToFront }: AboutProps) {
                 />
             )}
 
-            {visible[1] && (
+            {showMarkdown && (
                 <MarkdownViewer
                     title="about.md"
                     initialX={700}

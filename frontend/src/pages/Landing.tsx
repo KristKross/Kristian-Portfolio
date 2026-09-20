@@ -4,7 +4,6 @@ import ImageViewer from '../components/apps/ImageViewer'
 import MarkdownViewer from '../components/apps/MarkdownViewer'
 import ProfileImage from "../assets/profile-image.png"
 import type { BringToFront, WindowZIndexes } from '../types/window'
-import { useSectionAppearance } from '../hooks/useSectionAppearance'
 
 interface LandingProps {
     windowZIndexes: WindowZIndexes
@@ -97,18 +96,42 @@ function ScrollPrompt() {
 }
 
 function Landing({ windowZIndexes, bringToFront }: LandingProps) {
-    const { sectionRef, visible } = useSectionAppearance(
-        [300, 1000, 1700, 2300],
-        0.2
-    )
+    const [showTerminal, setShowTerminal] = useState(false)
+    const [showImageViewer, setShowImageViewer] = useState(false)
+    const [showMarkdownViewer, setShowMarkdownViewer] = useState(false)
+    const [showScrollPrompt, setShowScrollPrompt] = useState(false)
+
+    useEffect(() => {
+        const terminalTimer = setTimeout(() => {
+            setShowTerminal(true)
+        }, 300)
+
+        const imageTimer = setTimeout(() => {
+            setShowImageViewer(true)
+        }, 1000)
+
+        const markdownTimer = setTimeout(() => {
+            setShowMarkdownViewer(true)
+        }, 1700)
+
+        const scrollTimer = setTimeout(() => {
+            setShowScrollPrompt(true)
+        }, 2300)
+
+        return () => {
+            clearTimeout(terminalTimer)
+            clearTimeout(imageTimer)
+            clearTimeout(markdownTimer)
+            clearTimeout(scrollTimer)
+        }
+    }, [])
 
     return (
         <section
-            ref={sectionRef}
             id="landing"
             className="relative mt-8 flex flex-col items-center justify-center gap-6 px-2 lg:min-h-[calc(100vh-20px)]"
         >
-            {visible[0] && (
+            {showTerminal && (
                 <Terminal
                     title="kristian@portfolio: ~"
                     initialX={900}
@@ -117,30 +140,28 @@ function Landing({ windowZIndexes, bringToFront }: LandingProps) {
                     onFocus={() => bringToFront('landingTerminal')}
                     lines={[
                         {
-                            input: [
-                                {
-                                    text: "whoami",
-                                    className: "text-[#4FC1E9]",
-                                },
-                            ],
-                            output: [
-                                {
-                                    text: "kristian",
-                                    className: "text-[#9A9A9A]",
-                                },
-                            ],
+                            input: (
+                                <div className="text-[#4FC1E9]">
+                                    whoami
+                                </div>
+                            ),
+                            output: (
+                                <div className="mb-5 text-[#9A9A9A]">
+                                    kristian
+                                </div>
+                            ),
                         },
                         {
-                            input: [
-                                {
-                                    text: "xdg-open",
-                                    className: "text-[#4FC1E9]",
-                                },
-                                {
-                                    text: " profile.jpg",
-                                    className: "text-[#E6E6E6]",
-                                },
-                            ],
+                            input: (
+                                <div>
+                                    <span className="text-[#4FC1E9]">
+                                        xdg-open
+                                    </span>{" "}
+                                    <span className="text-[#E6E6E6]">
+                                        profile.jpg
+                                    </span>
+                                </div>
+                            ),
                             output: (
                                 <div className="mb-5 text-[#9A9A9A]">
                                     <span className="text-[#6F9D62]">
@@ -148,19 +169,19 @@ function Landing({ windowZIndexes, bringToFront }: LandingProps) {
                                     </span>{" "}
                                     Opening profile.jpg ...
                                 </div>
-                            )
+                            ),
                         },
                         {
-                            input: [
-                                {
-                                    text: "xdg-open",
-                                    className: "text-[#4FC1E9]",
-                                },
-                                {
-                                    text: " profile.md",
-                                    className:"text-[#E6E6E6]",
-                                },
-                            ],
+                            input: (
+                                <div>
+                                    <span className="text-[#4FC1E9]">
+                                        xdg-open
+                                    </span>{" "}
+                                    <span className="text-[#E6E6E6]">
+                                        profile.md
+                                    </span>
+                                </div>
+                            ),
                             output: (
                                 <div className="mb-5 text-[#9A9A9A]">
                                     <span className="text-[#6F9D62]">
@@ -168,14 +189,14 @@ function Landing({ windowZIndexes, bringToFront }: LandingProps) {
                                     </span>{" "}
                                     Opening profile.md ...
                                 </div>
-                            )
+                            ),
                         },
                     ]}
                     prompt="kristian@portfolio:~$"
                 />
             )}
 
-            {visible[1] && (
+            {showImageViewer && (
                 <ImageViewer
                     initialX={140}
                     initialY={70}
@@ -186,7 +207,7 @@ function Landing({ windowZIndexes, bringToFront }: LandingProps) {
                 />
             )}
 
-            {visible[2] && (
+            {showMarkdownViewer && (
                 <MarkdownViewer
                     title="profile.md"
                     initialX={700}
@@ -198,7 +219,7 @@ function Landing({ windowZIndexes, bringToFront }: LandingProps) {
                 />
             )}
 
-            {visible[3] && <ScrollPrompt />}
+            {showScrollPrompt && <ScrollPrompt />}
         </section>
     )
 }

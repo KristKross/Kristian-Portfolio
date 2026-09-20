@@ -24,9 +24,9 @@ function Skills({ windowZIndexes, bringToFront }: SkillsProps) {
                     initialY={70}
                     lines={[
                         {
-                            input: [
-                                { text: "./skills", className: "text-white" },
-                            ],
+                            input: (
+                                <span className="text-white">./skills</span>
+                            ),
                             output: (
                                 <div className="mb-5 text-[#9A9A9A]">
                                     <span className="text-[#6F9D62]">
@@ -34,7 +34,7 @@ function Skills({ windowZIndexes, bringToFront }: SkillsProps) {
                                     </span>{" "}
                                     Opening system monitor ...
                                 </div>
-                            )
+                            ),
                         },
                     ]}
                     prompt="kristian@portfolio:~$"
