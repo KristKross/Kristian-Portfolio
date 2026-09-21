@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from "react";
 import Terminal from "../components/apps/Terminal";
 import MarkdownViewer from "../components/apps/MarkdownViewer";
 import type { BringToFront, WindowZIndexes } from "../types/window";
+import { useSectionAppearance } from "../hooks/useSectionAppearance";
 
 interface AboutProps {
     windowZIndexes: WindowZIndexes;
@@ -38,18 +38,21 @@ const AboutContent = (
                 </span>
                 Build web applications
             </p>
+
             <p>
                 <span className="mr-2 inline-block w-[38px] text-gray-400">
                     02
                 </span>
                 Develop APIs and backend systems
             </p>
+
             <p>
                 <span className="mr-2 inline-block w-[38px] text-gray-400">
                     03
                 </span>
                 Work with databases and application architecture
             </p>
+
             <p>
                 <span className="mr-2 inline-block w-[38px] text-gray-400">
                     04
@@ -63,61 +66,23 @@ const AboutContent = (
         </h2>
 
         <p className="mt-4 text-sm text-gray-600 sm:text-base md:text-lg">
-            I like diving into things head on. I learn
-            best by building, experimenting, and occasionally breaking things
-            along the way. I enjoy the process of figuring things out and making
-            them better.
+            I like diving into things head on. I learn best by building,
+            experimenting, and occasionally breaking things along the way. I
+            enjoy the process of figuring things out and making them better.
         </p>
     </div>
 );
 
 function About({ windowZIndexes, bringToFront }: AboutProps) {
-    const sectionRef = useRef<HTMLElement>(null);
-
-    const [showTerminal, setShowTerminal] = useState(false);
-    const [showMarkdown, setShowMarkdown] = useState(false);
-
-    useEffect(() => {
-        const section = sectionRef.current;
-
-        if (!section) return;
-
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (!entry.isIntersecting) return;
-
-                const terminalTimer = setTimeout(() => {
-                    setShowTerminal(true);
-                }, 300);
-
-                const markdownTimer = setTimeout(() => {
-                    setShowMarkdown(true);
-                }, 1000);
-
-                observer.disconnect();
-
-                return () => {
-                    clearTimeout(terminalTimer);
-                    clearTimeout(markdownTimer);
-                };
-            },
-            {
-                threshold: 0.2,
-            }
-        );
-
-        observer.observe(section);
-
-        return () => observer.disconnect();
-    }, []);
+    const { sectionRef, visible } = useSectionAppearance([300, 1000]);
 
     return (
         <section
             ref={sectionRef}
             id="about"
-            className="relative mt-8 flex flex-col items-center justify-center gap-6 px-2 min-h-screen"
+            className="relative mt-8 flex min-h-screen flex-col items-center justify-center gap-6 px-2"
         >
-            {showTerminal && (
+            {visible[0] && (
                 <Terminal
                     title="kristian@portfolio: ~"
                     lines={[
@@ -151,14 +116,14 @@ function About({ windowZIndexes, bringToFront }: AboutProps) {
                 />
             )}
 
-            {showMarkdown && (
+            {visible[1] && (
                 <MarkdownViewer
                     title="about.md"
                     initialX={700}
                     initialY={60}
                     zIndex={windowZIndexes.aboutMarkdown}
                     onFocus={() => bringToFront("aboutMarkdown")}
-                    className="min-[1500px]:right-[10%] w-full max-w-[920px]"
+                    className="w-full max-w-[920px] min-[1500px]:right-[10%]"
                     text={AboutContent}
                 />
             )}

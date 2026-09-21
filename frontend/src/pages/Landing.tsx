@@ -4,6 +4,7 @@ import ImageViewer from '../components/apps/ImageViewer'
 import MarkdownViewer from '../components/apps/MarkdownViewer'
 import ProfileImage from "../assets/profile-image.png"
 import type { BringToFront, WindowZIndexes } from '../types/window'
+import { useSectionAppearance } from '../hooks/useSectionAppearance'
 
 interface LandingProps {
     windowZIndexes: WindowZIndexes
@@ -15,9 +16,11 @@ const LandingContent = (
         <h1 className="block text-3xl font-bold text-gray-900 md:text-5xl">
             Kristian Demonteverde
         </h1>
+
         <h2 className="mb-2 block text-2xl text-gray-600 md:text-3xl">
             Software Developer
         </h2>
+
         <p className="my-10 block min-w-[300px] max-w-[600px] text-base leading-[1.5] md:text-xl">
             I am a developer who enjoys building things from the ground up.
             I like exploring new technologies, solving problems, and turning my
@@ -37,6 +40,7 @@ const LandingContent = (
             </a>
             .
         </p>
+
         <p className="text-sm md:text-base">
             <span className="font-semibold text-[#00D26A]">
                 Currently →
@@ -82,7 +86,11 @@ function ScrollPrompt() {
         <button
             type="button"
             onClick={handleClick}
-            className={`absolute bottom-5 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 text-gray-400 transition-all duration-500 ease-out hover:text-gray-200 ${isVisible ? 'visible translate-y-0 opacity-100 blur-none' : 'invisible -translate-y-3 opacity-0 blur-sm pointer-events-none'}`}
+            className={`absolute bottom-10 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 text-gray-400 transition-all duration-500 ease-out hover:text-gray-200 ${
+                isVisible
+                    ? 'visible translate-y-0 opacity-100 blur-none'
+                    : 'invisible -translate-y-3 opacity-0 blur-sm pointer-events-none'
+            }`}
         >
             <span className="text-[20px]">
                 SCROLL TO CONTINUE
@@ -96,42 +104,20 @@ function ScrollPrompt() {
 }
 
 function Landing({ windowZIndexes, bringToFront }: LandingProps) {
-    const [showTerminal, setShowTerminal] = useState(false)
-    const [showImageViewer, setShowImageViewer] = useState(false)
-    const [showMarkdownViewer, setShowMarkdownViewer] = useState(false)
-    const [showScrollPrompt, setShowScrollPrompt] = useState(false)
-
-    useEffect(() => {
-        const terminalTimer = setTimeout(() => {
-            setShowTerminal(true)
-        }, 300)
-
-        const imageTimer = setTimeout(() => {
-            setShowImageViewer(true)
-        }, 1000)
-
-        const markdownTimer = setTimeout(() => {
-            setShowMarkdownViewer(true)
-        }, 1700)
-
-        const scrollTimer = setTimeout(() => {
-            setShowScrollPrompt(true)
-        }, 2300)
-
-        return () => {
-            clearTimeout(terminalTimer)
-            clearTimeout(imageTimer)
-            clearTimeout(markdownTimer)
-            clearTimeout(scrollTimer)
-        }
-    }, [])
+    const { sectionRef, visible } = useSectionAppearance([
+        300,
+        1000,
+        1700,
+        1700,
+    ])
 
     return (
         <section
+            ref={sectionRef}
             id="landing"
             className="relative mt-8 flex flex-col items-center justify-center gap-6 px-2 lg:min-h-[calc(100vh-20px)]"
         >
-            {showTerminal && (
+            {visible[0] && (
                 <Terminal
                     title="kristian@portfolio: ~"
                     initialX={900}
@@ -196,7 +182,7 @@ function Landing({ windowZIndexes, bringToFront }: LandingProps) {
                 />
             )}
 
-            {showImageViewer && (
+            {visible[1] && (
                 <ImageViewer
                     initialX={140}
                     initialY={70}
@@ -207,7 +193,7 @@ function Landing({ windowZIndexes, bringToFront }: LandingProps) {
                 />
             )}
 
-            {showMarkdownViewer && (
+            {visible[2] && (
                 <MarkdownViewer
                     title="profile.md"
                     initialX={700}
@@ -219,7 +205,7 @@ function Landing({ windowZIndexes, bringToFront }: LandingProps) {
                 />
             )}
 
-            {showScrollPrompt && <ScrollPrompt />}
+            {visible[3] && <ScrollPrompt />}
         </section>
     )
 }

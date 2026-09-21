@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import Background from './assets/desktop-background.jpg'
 import Navbar from './components/desktop/Navbar.tsx'
 import DesktopDecor from './components/desktop/DesktopDecor.tsx'
+import StartupSequence from './components/desktop/StartupSequence.tsx'
 import Landing from './pages/Landing'
 import About from './pages/About.tsx'
 import Projects from './pages/Projects.tsx'
@@ -69,6 +70,10 @@ function Wallpaper() {
 }
 
 function App() {
+    const [isStarted, setIsStarted] = useState(() => {
+        return sessionStorage.getItem('portfolio-started') === 'true'
+    })
+
     const highestZIndex = useRef(14)
 
     const [windowZIndexes, setWindowZIndexes] = useState(
@@ -88,11 +93,23 @@ function App() {
         }))
     }
 
+    if (!isStarted) {
+        return (
+            <StartupSequence
+                onComplete={() => {
+                    sessionStorage.setItem('portfolio-started', 'true')
+                    setIsStarted(true)
+                }}
+            />
+        )
+    }
+
     return (
         <div className="relative min-h-screen isolate">
             <Wallpaper />
             <DesktopDecor />
             <Navbar />
+
             <div className="px-4 sm:px-6 lg:px-20">
                 <div className="relative isolate min-h-fit max-h-[calc(100vh)]">
                     <Landing
