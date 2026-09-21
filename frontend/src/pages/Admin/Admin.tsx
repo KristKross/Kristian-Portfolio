@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Dashboard from "./Dashboard";
 import Login from "./login";
 
+
 function Admin() {
     const [authenticated, setAuthenticated] = useState<boolean | null>(null);
 
