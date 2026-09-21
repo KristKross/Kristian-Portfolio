@@ -13,6 +13,15 @@ export function useSectionAppearance(
     delaysRef.current = delays;
 
     useEffect(() => {
+        const isDesktop = window.matchMedia(
+            "(min-width: 1024px)"
+        ).matches;
+
+        if (!isDesktop) {
+            setVisible(delays.map(() => true));
+            return;
+        }
+
         const section = sectionRef.current;
         if (!section) return;
 
@@ -49,7 +58,7 @@ export function useSectionAppearance(
             observer.disconnect();
             timers.forEach(clearTimeout);
         };
-    }, [threshold]);
+    }, [threshold, delays]);
 
     return {
         sectionRef,

@@ -378,7 +378,7 @@ function FileManager({
                                         </div>
                                     </div>
 
-                                    <div className="mt-6 flex flex-wrap justify-center gap-3">
+                                    <div className="mt-6 flex flex-col items-center justify-center gap-3">
                                         {selectedProject.demo && (
                                             <iframe
                                                 src={`${selectedProject.demo}?controls=0&modestbranding=1&rel=0`}
@@ -390,12 +390,10 @@ function FileManager({
 
                                         {selectedProject.link && (
                                             <a
-                                                href={
-                                                    selectedProject.link
-                                                }
+                                                href={selectedProject.link}
                                                 target="_blank"
                                                 rel="noreferrer"
-                                                className="mt-4 cursor-pointer rounded-md border border-[#2a2a2a] bg-[#141a21] px-7 py-2 text-xs text-gray-300 transition hover:border-[#4FC1E9]/60 hover:text-[#4FC1E9]"
+                                                className="mt-4 shrink-0 rounded-md bg-[#4FC1E9] px-7 py-2 text-center text-xs font-semibold text-[#10151a] transition hover:brightness-110"
                                             >
                                                 GitHub
                                             </a>
