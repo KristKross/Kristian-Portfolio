@@ -4,7 +4,7 @@ import Mail from "../components/apps/Mail"
 import Linkedin from "../components/content/Linkedin"
 import Github from "../components/content/Github"
 import type { BringToFront, WindowZIndexes } from "../types/window"
-import { useSectionAppearance } from "../hooks/useSectionAppearance"
+import useSectionAppearance from "../hooks/useSectionAppearance"
 
 interface ContactProps {
     windowZIndexes: WindowZIndexes

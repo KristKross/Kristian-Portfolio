@@ -1,7 +1,7 @@
 import Terminal from "../components/apps/Terminal";
 import MarkdownViewer from "../components/apps/MarkdownViewer";
 import type { BringToFront, WindowZIndexes } from "../types/window";
-import { useSectionAppearance } from "../hooks/useSectionAppearance";
+import useSectionAppearance from "../hooks/useSectionAppearance"
 
 interface AboutProps {
     windowZIndexes: WindowZIndexes;

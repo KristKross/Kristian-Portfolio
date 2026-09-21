@@ -1,7 +1,7 @@
-import Terminal from '../components/apps/Terminal'
-import SystemMonitor from '../components/apps/SystemMonitor'
-import type { BringToFront, WindowZIndexes } from '../types/window'
-import { useSectionAppearance } from '../hooks/useSectionAppearance'
+import Terminal from "../components/apps/Terminal"
+import SystemMonitor from "../components/apps/SystemMonitor"
+import type { BringToFront, WindowZIndexes } from "../types/window"
+import useSectionAppearance from "../hooks/useSectionAppearance"
 
 interface SkillsProps {
     windowZIndexes: WindowZIndexes
@@ -39,7 +39,7 @@ function Skills({ windowZIndexes, bringToFront }: SkillsProps) {
                     ]}
                     prompt="kristian@portfolio:~$"
                     zIndex={windowZIndexes.skillsTerminal}
-                    onFocus={() => bringToFront('skillsTerminal')}
+                    onFocus={() => bringToFront("skillsTerminal")}
                 />
             )}
 
@@ -48,7 +48,7 @@ function Skills({ windowZIndexes, bringToFront }: SkillsProps) {
                     initialX={700}
                     initialY={90}
                     zIndex={windowZIndexes.systemMonitor}
-                    onFocus={() => bringToFront('systemMonitor')}
+                    onFocus={() => bringToFront("systemMonitor")}
                 />
             )}
         </section>

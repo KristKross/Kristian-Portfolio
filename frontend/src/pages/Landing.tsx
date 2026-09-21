@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react'
-import Terminal from '../components/apps/Terminal'
-import ImageViewer from '../components/apps/ImageViewer'
-import MarkdownViewer from '../components/apps/MarkdownViewer'
+import { useEffect, useState } from "react"
+import Terminal from "../components/apps/Terminal"
+import ImageViewer from "../components/apps/ImageViewer"
+import MarkdownViewer from "../components/apps/MarkdownViewer"
 import ProfileImage from "../assets/profile-image.png"
-import type { BringToFront, WindowZIndexes } from '../types/window'
-import { useSectionAppearance } from '../hooks/useSectionAppearance'
+import type { BringToFront, WindowZIndexes } from "../types/window"
+import useSectionAppearance from "../hooks/useSectionAppearance"
 
 interface LandingProps {
     windowZIndexes: WindowZIndexes
@@ -67,19 +67,19 @@ function ScrollPrompt() {
             }
         }
 
-        window.addEventListener('scroll', handleScroll, {
+        window.addEventListener("scroll", handleScroll, {
             passive: true,
         })
 
         return () => {
-            window.removeEventListener('scroll', handleScroll)
+            window.removeEventListener("scroll", handleScroll)
         }
     }, [])
 
     const handleClick = () => {
         document
-            .getElementById('about')
-            ?.scrollIntoView({ behavior: 'smooth' })
+            .getElementById("about")
+            ?.scrollIntoView({ behavior: "smooth" })
     }
 
     return (
@@ -88,8 +88,8 @@ function ScrollPrompt() {
             onClick={handleClick}
             className={`absolute bottom-10 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 text-gray-400 transition-all duration-500 ease-out hover:text-gray-200 ${
                 isVisible
-                    ? 'visible translate-y-0 opacity-100 blur-none'
-                    : 'invisible -translate-y-3 opacity-0 blur-sm pointer-events-none'
+                    ? "visible translate-y-0 opacity-100 blur-none"
+                    : "invisible -translate-y-3 opacity-0 blur-sm pointer-events-none"
             }`}
         >
             <span className="text-[20px]">
@@ -123,7 +123,7 @@ function Landing({ windowZIndexes, bringToFront }: LandingProps) {
                     initialX={900}
                     initialY={60}
                     zIndex={windowZIndexes.landingTerminal}
-                    onFocus={() => bringToFront('landingTerminal')}
+                    onFocus={() => bringToFront("landingTerminal")}
                     lines={[
                         {
                             input: (
@@ -187,7 +187,7 @@ function Landing({ windowZIndexes, bringToFront }: LandingProps) {
                     initialX={140}
                     initialY={70}
                     zIndex={windowZIndexes.imageViewer}
-                    onFocus={() => bringToFront('imageViewer')}
+                    onFocus={() => bringToFront("imageViewer")}
                     image={ProfileImage}
                     className="sm:max-w-[100%] md:max-w-[100%] lg:max-w-[600px]"
                 />
@@ -199,7 +199,7 @@ function Landing({ windowZIndexes, bringToFront }: LandingProps) {
                     initialX={700}
                     initialY={240}
                     zIndex={windowZIndexes.profileMarkdown}
-                    onFocus={() => bringToFront('profileMarkdown')}
+                    onFocus={() => bringToFront("profileMarkdown")}
                     className="w-full max-w-[920px]"
                     text={LandingContent}
                 />

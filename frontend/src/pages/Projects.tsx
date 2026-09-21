@@ -1,9 +1,9 @@
-import { useState } from 'react'
-import Terminal from '../components/apps/Terminal'
-import FileManager, { type Project } from '../components/apps/FileManager'
-import ProjectWindow from '../components/content/ProjectWindow'
-import type { BringToFront, WindowZIndexes } from '../types/window'
-import { useSectionAppearance } from '../hooks/useSectionAppearance'
+import { useState } from "react"
+import Terminal from "../components/apps/Terminal"
+import FileManager, { type Project } from "../components/apps/FileManager"
+import ProjectWindow from "../components/content/ProjectWindow"
+import type { BringToFront, WindowZIndexes } from "../types/window"
+import useSectionAppearance from "../hooks/useSectionAppearance"
 
 interface ProjectsProps {
     windowZIndexes: WindowZIndexes
@@ -27,7 +27,7 @@ function Projects({ windowZIndexes, bringToFront }: ProjectsProps) {
             return [...current, project]
         })
 
-        bringToFront('projectWindow')
+        bringToFront("projectWindow")
     }
 
     const closeProject = (project: Project) => {
@@ -64,7 +64,7 @@ function Projects({ windowZIndexes, bringToFront }: ProjectsProps) {
                     zIndex={windowZIndexes.projectsTerminal}
                     initialX={200}
                     initialY={60}
-                    onFocus={() => bringToFront('projectsTerminal')}
+                    onFocus={() => bringToFront("projectsTerminal")}
                 />
             )}
 
@@ -73,7 +73,7 @@ function Projects({ windowZIndexes, bringToFront }: ProjectsProps) {
                     zIndex={windowZIndexes.fileManager}
                     initialX={550}
                     initialY={160}
-                    onFocus={() => bringToFront('fileManager')}
+                    onFocus={() => bringToFront("fileManager")}
                     onOpenProject={openProject}
                     selectedProject={selectedProject}
                 />
@@ -86,9 +86,9 @@ function Projects({ windowZIndexes, bringToFront }: ProjectsProps) {
                     initialX={400 + index * 40}
                     initialY={50 + index * 40}
                     zIndex={windowZIndexes.projectWindow + index}
-                    onFocus={() => bringToFront('projectWindow')}
+                    onFocus={() => bringToFront("projectWindow")}
                     onClose={() => closeProject(project)}
-                    className='hidden md:m-0 sm:m-0 lg:block'
+                    className="hidden md:m-0 sm:m-0 lg:block"
                 />
             ))}
         </section>

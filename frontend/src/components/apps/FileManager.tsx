@@ -70,8 +70,7 @@ function FileManager({
                     throw new Error("Failed to fetch projects");
                 }
 
-                const data: BackendProject[] =
-                    await response.json();
+                const data: BackendProject[] = await response.json();
 
                 const formattedProjects: Project[] = data
                     .map((project) => ({
@@ -83,17 +82,11 @@ function FileManager({
                         demo: project.demo || undefined,
                         order: project.order,
                     }))
-                    .sort(
-                        (a, b) => a.order - b.order
-                    );
+                    .sort((a, b) => a.order - b.order);
 
                 setProjects(formattedProjects);
             } catch (error) {
-                console.error(
-                    "Failed to fetch projects:",
-                    error
-                );
-
+                console.error("Failed to fetch projects:", error);
                 setError("Unable to load projects");
             } finally {
                 setLoading(false);
@@ -107,7 +100,7 @@ function FileManager({
         <div
             ref={draggableRef}
             onPointerDown={onFocus}
-            className={`window-pop-in relative flex w-full max-w-[1100px] flex-col px-4 pb-8 sm:px-6 lg:absolute lg:m-4 ${className}`}
+            className={`window-pop-in relative flex w-full max-w-[1100px] flex-col px-2 pb-4 sm:px-3 sm:pb-6 md:px-4 lg:absolute lg:m-4 lg:px-6 lg:pb-8 ${className}`}
             style={{
                 ...(isDesktop && {
                     left: position.x,
@@ -116,72 +109,49 @@ function FileManager({
                 zIndex,
             }}
         >
-            <div className="overflow-hidden rounded-2xl border border-[#2a2a2a] bg-[#0f1115]/90 shadow-[0_0_30px_rgba(0,0,0,0.25)] backdrop-blur-sm">
+            <div className="overflow-hidden rounded-xl border border-[#2a2a2a] bg-[#0f1115]/90 shadow-[0_0_30px_rgba(0,0,0,0.25)] backdrop-blur-sm sm:rounded-2xl">
+
                 {/* Title bar */}
-                <div className="border-b border-[#2a2a2a] bg-[#11151a] text-[11px] text-gray-300">
+                <div className="border-b border-[#2a2a2a] bg-[#11151a] text-[10px] text-gray-300 sm:text-[11px]">
                     <div
                         onPointerDown={handlePointerDown}
                         onPointerMove={handlePointerMove}
                         onPointerUp={handlePointerUp}
-                        className="relative flex select-none items-center justify-center px-4 py-2.5 lg:cursor-grab"
+                        className="relative flex select-none items-center justify-center px-3 py-2 sm:px-4 sm:py-2.5 lg:cursor-grab"
                     >
-                        <div className="text-sm font-semibold text-[#e6e6e6]">
+                        <div className="text-xs font-semibold text-[#e6e6e6] sm:text-sm">
                             File Manager
                         </div>
 
-                        <div className="absolute right-4 flex items-center gap-3">
+                        <div className="absolute right-3 flex items-center gap-2 sm:right-4 sm:gap-3">
                             <WindowsControl />
                         </div>
                     </div>
 
                     {/* Menu bar */}
-                    <div className="flex items-center gap-2 border-t border-[#2a2a2a] bg-[#141b22] px-4 py-2 text-sm uppercase">
-                        <button
-                            type="button"
-                            className="rounded px-2 py-1 transition hover:bg-gray-700"
-                        >
-                            File
-                        </button>
-
-                        <button
-                            type="button"
-                            className="rounded px-2 py-1 transition hover:bg-gray-700"
-                        >
-                            Edit
-                        </button>
-
-                        <button
-                            type="button"
-                            className="rounded px-2 py-1 transition hover:bg-gray-700"
-                        >
-                            View
-                        </button>
-
-                        <button
-                            type="button"
-                            className="rounded px-2 py-1 transition hover:bg-gray-700"
-                        >
-                            Go
-                        </button>
-
-                        <button
-                            type="button"
-                            className="rounded px-2 py-1 transition hover:bg-gray-700"
-                        >
-                            Bookmarks
-                        </button>
-
-                        <button
-                            type="button"
-                            className="rounded px-2 py-1 transition hover:bg-gray-700"
-                        >
-                            Help
-                        </button>
+                    <div className="flex items-center gap-0.5 overflow-x-auto border-t border-[#2a2a2a] bg-[#141b22] px-2 py-1.5 text-[10px] uppercase sm:gap-1 sm:px-3 sm:py-2 sm:text-xs md:gap-2 md:px-4 md:text-sm">
+                        {[
+                            "File",
+                            "Edit",
+                            "View",
+                            "Go",
+                            "Bookmarks",
+                            "Help",
+                        ].map((item) => (
+                            <button
+                                key={item}
+                                type="button"
+                                className="shrink-0 rounded px-2 py-1 transition hover:bg-gray-700 sm:px-2.5"
+                            >
+                                {item}
+                            </button>
+                        ))}
                     </div>
                 </div>
 
                 {/* Desktop layout */}
                 <div className="hidden min-h-[560px] lg:flex">
+
                     {/* Sidebar */}
                     <aside className="w-[220px] shrink-0 border-r border-[#2a2a2a] bg-[#121820] p-4 text-sm text-gray-300">
                         <div className="mb-4 text-[14px] font-semibold text-gray-300">
@@ -189,21 +159,10 @@ function FileManager({
                         </div>
 
                         <div className="mt-2 space-y-2 text-gray-400">
-                            <div className="px-2 py-1">
-                                Computer
-                            </div>
-
-                            <div className="px-2 py-1">
-                                kristian
-                            </div>
-
-                            <div className="px-2 py-1">
-                                Documents
-                            </div>
-
-                            <div className="px-2 py-1">
-                                Downloads
-                            </div>
+                            <div className="px-2 py-1">Computer</div>
+                            <div className="px-2 py-1">kristian</div>
+                            <div className="px-2 py-1">Documents</div>
+                            <div className="px-2 py-1">Downloads</div>
 
                             <div className="rounded-md bg-[#1a212b] px-2 py-1.5 text-[#E6E6E6]">
                                 Projects
@@ -223,6 +182,7 @@ function FileManager({
 
                     {/* Main */}
                     <main className="flex min-w-0 flex-1 flex-col bg-[#0f1115] p-4">
+
                         <div className="mb-6 border-b border-[#2a2a2a] pb-3">
                             <div className="flex items-center justify-between">
                                 <div className="text-sm text-[#E6E6E6]">
@@ -277,32 +237,28 @@ function FileManager({
                         )}
 
                         <div className="mt-auto flex items-center justify-between border-t border-[#2a2a2a] pt-3 text-[14px] text-gray-400">
-                            <span>
-                                {projects.length} Folders
-                            </span>
-
-                            <span>
-                                Free space 2.1 GiB
-                            </span>
+                            <span>{projects.length} Folders</span>
+                            <span>Free space 2.1 GiB</span>
                         </div>
                     </main>
                 </div>
 
                 {/* Small screen layout */}
-                <div className="flex min-h-[500px] flex-col sm:flex-row lg:hidden">
+                <div className="flex min-h-[420px] flex-col sm:min-h-[460px] sm:flex-row lg:hidden">
+
                     {/* Project list */}
-                    <aside className="w-full shrink-0 border-b border-[#2a2a2a] bg-[#121820] p-3 sm:w-[190px] sm:border-b-0 sm:border-r md:w-[220px]">
-                        <div className="mb-3 px-2 text-[11px] font-semibold tracking-[0.12em] text-gray-500">
+                    <aside className="w-full shrink-0 border-b border-[#2a2a2a] bg-[#121820] p-2.5 sm:w-[170px] sm:border-b-0 sm:border-r sm:p-3 md:w-[190px] md:p-4">
+                        <div className="mb-2 px-2 text-[10px] font-semibold tracking-[0.12em] text-gray-500 sm:mb-3">
                             PROJECTS
                         </div>
 
                         <div className="flex gap-1 overflow-x-auto sm:flex-col sm:overflow-x-visible">
                             {loading ? (
-                                <div className="px-3 py-2 text-xs text-gray-500">
+                                <div className="px-3 py-2 text-[10px] text-gray-500 sm:text-xs">
                                     Loading...
                                 </div>
                             ) : error ? (
-                                <div className="px-3 py-2 text-xs text-red-400">
+                                <div className="px-3 py-2 text-[10px] text-red-400 sm:text-xs">
                                     Failed to load projects
                                 </div>
                             ) : (
@@ -316,20 +272,16 @@ function FileManager({
                                             type="button"
                                             key={project._id}
                                             onClick={() =>
-                                                onOpenProject(
-                                                    project
-                                                )
+                                                onOpenProject(project)
                                             }
-                                            className={`min-w-max cursor-pointer rounded-md px-3 py-2 text-left text-xs transition-colors sm:w-full ${
+                                            className={`min-w-max cursor-pointer rounded-md px-2.5 py-1.5 text-left text-[10px] transition-colors sm:w-full sm:px-3 sm:py-2 sm:text-[11px] md:text-xs ${
                                                 isActive
                                                     ? "bg-[#1a212b] text-[#E6E6E6]"
                                                     : "text-gray-400 hover:bg-[#171e27] hover:text-white"
                                             }`}
                                         >
-                                            <span className="mr-2 text-[#687582]">
-                                                {isActive
-                                                    ? "▸"
-                                                    : " "}
+                                            <span className="mr-1.5 text-[#687582]">
+                                                {isActive ? "▸" : " "}
                                             </span>
 
                                             {project.name}
@@ -341,35 +293,37 @@ function FileManager({
                     </aside>
 
                     {/* Project details */}
-                    <main className="min-w-0 flex-1 bg-[#0f1115] p-5 sm:p-6">
+                    <main className="min-w-0 flex-1 bg-[#0f1115] p-3.5 sm:p-5 md:p-6">
                         {selectedProject ? (
                             <div className="flex h-full flex-col">
-                                <div className="mb-6 border-b border-[#2a2a2a] pb-4">
-                                    <div className="text-[10px] uppercase tracking-[0.12em] text-gray-500">
+
+                                <div className="mb-4 border-b border-[#2a2a2a] pb-3 sm:mb-5 sm:pb-4 md:mb-6">
+                                    <div className="text-[9px] uppercase tracking-[0.12em] text-gray-500 sm:text-[10px]">
                                         Project
                                     </div>
 
-                                    <h2 className="mt-1 break-words text-xl font-semibold text-[#E6E6E6]">
+                                    <h2 className="mt-1 break-words text-lg font-semibold text-[#E6E6E6] sm:text-xl md:text-xl">
                                         {selectedProject.name}
                                     </h2>
                                 </div>
 
                                 <div className="flex-1">
-                                    <p className="max-w-2xl text-sm leading-6 text-gray-400">
+
+                                    <p className="max-w-2xl text-xs leading-5 text-gray-400 sm:text-sm sm:leading-6">
                                         {selectedProject.description}
                                     </p>
 
-                                    <div className="mt-6">
-                                        <div className="mb-2 text-[10px] uppercase tracking-[0.12em] text-gray-500">
+                                    <div className="mt-4 sm:mt-5 md:mt-6">
+                                        <div className="mb-2 text-[9px] uppercase tracking-[0.12em] text-gray-500 sm:text-[10px]">
                                             Technologies
                                         </div>
 
-                                        <div className="flex flex-wrap gap-2">
+                                        <div className="flex flex-wrap gap-1.5 sm:gap-2">
                                             {selectedProject.tech.map(
                                                 (tech) => (
                                                     <span
                                                         key={tech}
-                                                        className="rounded-md border border-[#2a2a2a] bg-[#141a21] px-2.5 py-1 text-xs text-gray-300"
+                                                        className="rounded-md border border-[#2a2a2a] bg-[#141a21] px-2 py-0.5 text-[10px] text-gray-300 sm:px-2.5 sm:py-1 sm:text-xs"
                                                     >
                                                         {tech}
                                                     </span>
@@ -378,12 +332,13 @@ function FileManager({
                                         </div>
                                     </div>
 
-                                    <div className="mt-6 flex flex-col items-center justify-center gap-3">
+                                    <div className="mt-5 flex flex-col items-center justify-center gap-2 sm:mt-6 sm:gap-3">
+
                                         {selectedProject.demo && (
                                             <iframe
                                                 src={`${selectedProject.demo}?controls=0&modestbranding=1&rel=0`}
                                                 title={`${selectedProject.name} demo`}
-                                                className="aspect-video w-[75%] rounded-md border border-[#2a2a2a] bg-[#141a21]"
+                                                className="aspect-video w-full max-w-[520px] rounded-md border border-[#2a2a2a] bg-[#141a21] sm:w-[85%] md:w-[80%]"
                                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                             />
                                         )}
@@ -393,7 +348,7 @@ function FileManager({
                                                 href={selectedProject.link}
                                                 target="_blank"
                                                 rel="noreferrer"
-                                                className="mt-4 shrink-0 rounded-md bg-[#4FC1E9] px-7 py-2 text-center text-xs font-semibold text-[#10151a] transition hover:brightness-110"
+                                                className="mt-2 shrink-0 rounded-md bg-[#4FC1E9] px-5 py-1.5 text-center text-[10px] font-semibold text-[#10151a] transition hover:brightness-110 sm:px-6 sm:py-2 sm:text-xs"
                                             >
                                                 GitHub
                                             </a>
@@ -401,19 +356,19 @@ function FileManager({
                                     </div>
                                 </div>
 
-                                <div className="mt-8 border-t border-[#2a2a2a] pt-3 text-[11px] text-gray-500">
+                                <div className="mt-5 border-t border-[#2a2a2a] pt-2.5 text-[9px] text-gray-500 sm:mt-7 sm:pt-3 sm:text-[11px]">
                                     /home/kristian/projects/
                                     {selectedProject.name}
                                 </div>
                             </div>
                         ) : (
-                            <div className="flex h-full min-h-[420px] items-center justify-center text-center">
+                            <div className="flex h-full min-h-[350px] items-center justify-center text-center sm:min-h-[420px]">
                                 <div>
-                                    <div className="text-sm text-gray-400">
+                                    <div className="text-xs text-gray-400 sm:text-sm">
                                         Select a project
                                     </div>
 
-                                    <div className="mt-1 text-[11px] text-gray-600">
+                                    <div className="mt-1 text-[9px] text-gray-600 sm:text-[11px]">
                                         Choose a project from the sidebar
                                     </div>
                                 </div>

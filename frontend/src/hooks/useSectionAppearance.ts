@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-export function useSectionAppearance(
+function useSectionAppearance(
     delays: number[] = [300],
     threshold = 0.2
 ) {
@@ -65,3 +65,5 @@ export function useSectionAppearance(
         visible,
     };
 }
+
+export default useSectionAppearance
