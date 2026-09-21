@@ -20,6 +20,6 @@
   },
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "create-admin": "tsx src/createAdmin.ts"
+    "start": "node index.js"
   }
 }
