@@ -1,14 +1,19 @@
 import './App.css'
 import { useEffect, useRef, useState } from 'react'
+import { Routes, Route } from 'react-router-dom'
+
 import Background from './assets/desktop-background.jpg'
 import Navbar from './components/desktop/Navbar.tsx'
 import DesktopDecor from './components/desktop/DesktopDecor.tsx'
 import StartupSequence from './components/desktop/StartupSequence.tsx'
+
 import Landing from './pages/Landing'
 import About from './pages/About.tsx'
 import Projects from './pages/Projects.tsx'
 import Skills from './pages/Skills.tsx'
 import Contact from './pages/Contact.tsx'
+
+import Admin from './pages/Admin/Admin.tsx'
 
 const initialWindowZIndexes = {
     landingTerminal: 1,
@@ -69,7 +74,7 @@ function Wallpaper() {
     )
 }
 
-function App() {
+function Portfolio() {
     const [isStarted, setIsStarted] = useState(() => {
         return sessionStorage.getItem('portfolio-started') === 'true'
     })
@@ -116,18 +121,22 @@ function App() {
                         windowZIndexes={windowZIndexes}
                         bringToFront={bringToFront}
                     />
+
                     <About
                         windowZIndexes={windowZIndexes}
                         bringToFront={bringToFront}
                     />
+
                     <Projects
                         windowZIndexes={windowZIndexes}
                         bringToFront={bringToFront}
                     />
+
                     <Skills
                         windowZIndexes={windowZIndexes}
                         bringToFront={bringToFront}
                     />
+
                     <Contact
                         windowZIndexes={windowZIndexes}
                         bringToFront={bringToFront}
@@ -135,6 +144,15 @@ function App() {
                 </div>
             </div>
         </div>
+    )
+}
+
+function App() {
+    return (
+        <Routes>
+            <Route path="/" element={<Portfolio />} />
+            <Route path="/admin" element={<Admin />} />
+        </Routes>
     )
 }
 

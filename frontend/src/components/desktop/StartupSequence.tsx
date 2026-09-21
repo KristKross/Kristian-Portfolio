@@ -81,10 +81,6 @@ function LoginScreen({ onLogin }: LoginScreenProps) {
                     <div className="p-8">
                         {/* User */}
                         <div className="mb-6 flex items-center border border-[#3A4656] bg-[#171E29] px-4 py-3 text-sm">
-                            <span className="mr-3 text-[#5DADE2]">
-                                user:
-                            </span>
-
                             <span className="text-[#F5F7FA]">
                                 kristian
                             </span>
@@ -92,10 +88,6 @@ function LoginScreen({ onLogin }: LoginScreenProps) {
 
                         {/* Password */}
                         <div className="mb-6 flex items-center border border-[#3A4656] bg-[#171E29] px-4 py-3 text-sm">
-                            <span className="mr-3 text-[#5DADE2]">
-                                password:
-                            </span>
-
                             <span className="text-[#F5F7FA]">
                                 <Typewriter
                                     text="••••••••"
@@ -135,4 +127,4 @@ function StartupSequence({ onComplete }: StartupSequenceProps) {
     );
 }
 
-export default StartupSequence;
+export default StartupSequence

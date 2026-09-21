@@ -85,27 +85,19 @@ function ProjectWindow({
                             {project.name}
                         </h2>
                     </div>
-                    <p className="max-w-[650px] text-sm leading-7 text-gray-400">
+                    <p className="max-w-[650px] pb-5 text-sm leading-7 text-gray-400">
                         {project.description}
                     </p>
 
                     {project.demo && (
-                        <>
-                            <div className="my-7 border-t border-[#2a2a2a]" />
-
-                            <section>
-                                <div className="mb-3 text-[10px] font-semibold tracking-[0.12em] text-gray-500">
-                                    DEMO
-                                </div>
-
-                                <div className="flex justify-center">
-                                    <video
-                                        src={project.demo} muted controls playsInline preload="metadata"
-                                        className="aspect-video h-[150px] w-full rounded-lg border border-[#2a2a2a] bg-black object-cover"
-                                    />
-                                </div>
-                            </section>
-                        </>
+                        <div className="flex justify-center">
+                            <iframe
+                                src={`${project.demo}?controls=0&modestbranding=1&rel=0`}
+                                title={`${project.name} demo`}
+                                className="aspect-video w-[75%] rounded-md border border-[#2a2a2a] bg-[#141a21]"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            />
+                        </div>
                     )}
 
                     <div className="my-7 border-t border-[#2a2a2a]" />

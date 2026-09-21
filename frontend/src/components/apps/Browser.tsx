@@ -152,4 +152,4 @@ function Browser({
     );
 }
 
-export default Browser;
+export default Browser

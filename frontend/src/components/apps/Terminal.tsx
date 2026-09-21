@@ -112,4 +112,4 @@ function Terminal({
     );
 }
 
-export default Terminal;
+export default Terminal

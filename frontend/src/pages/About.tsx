@@ -131,4 +131,4 @@ function About({ windowZIndexes, bringToFront }: AboutProps) {
     );
 }
 
-export default About;
+export default About

@@ -109,4 +109,4 @@ function Linkedin({
     );
 }
 
-export default Linkedin;
+export default Linkedin

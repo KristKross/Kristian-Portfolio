@@ -56,4 +56,4 @@ function Typewriter({
     );
 }
 
-export default Typewriter;
+export default Typewriter

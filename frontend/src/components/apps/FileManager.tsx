@@ -1,49 +1,38 @@
-import WindowsControl from '../desktop/WindowControls'
-import useDraggable from '../../hooks/useDraggable'
+import { useEffect, useState } from "react";
+import WindowsControl from "../desktop/WindowControls";
+import useDraggable from "../../hooks/useDraggable";
 import { Folder } from "lucide-react";
 
 export interface Project {
-    name: string
-    description: string
-    tech: string[]
-    link: string
-    demo?: string
+    _id: string;
+    name: string;
+    description: string;
+    tech: string[];
+    link: string;
+    demo?: string;
+    order: number;
+}
+
+interface BackendProject {
+    _id: string;
+    title: string;
+    description: string;
+    technologies: string[];
+    demo: string;
+    githubUrl: string;
+    order: number;
 }
 
 interface FileManagerProps {
-    className?: string
-    y?: string
-    initialX?: number
-    initialY?: number
-    zIndex?: number
-    onFocus?: () => void
-    onOpenProject: (project: Project) => void
-    selectedProject?: Project | null
+    className?: string;
+    y?: string;
+    initialX?: number;
+    initialY?: number;
+    zIndex?: number;
+    onFocus?: () => void;
+    onOpenProject: (project: Project) => void;
+    selectedProject?: Project | null;
 }
-
-export const exampleProjects: Project[] = [
-    {
-        name: 'portfolio-web',
-        description:
-            'A personal portfolio built with React and TypeScript to showcase projects, skills, and experience.',
-        tech: ['React', 'TypeScript', 'Tailwind CSS', 'Vite'],
-        link: '#',
-    },
-    {
-        name: 'task-manager',
-        description:
-            'A productivity app with task tracking, filtering, and project organization for daily planning.',
-        tech: ['React', 'Node.js', 'MongoDB'],
-        link: '#',
-    },
-    {
-        name: 'analytics-dashboard',
-        description:
-            'A data-heavy dashboard for visualizing metrics, activity trends, and performance summaries.',
-        tech: ['Next.js', 'TypeScript', 'PostgreSQL'],
-        link: '#',
-    },
-]
 
 function FileManager({
     className,
@@ -61,7 +50,58 @@ function FileManager({
         handlePointerDown,
         handlePointerMove,
         handlePointerUp,
-    } = useDraggable<HTMLDivElement>(initialX, initialY)
+    } = useDraggable<HTMLDivElement>(initialX, initialY);
+
+    const [projects, setProjects] = useState<Project[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
+
+    useEffect(() => {
+        const fetchProjects = async () => {
+            try {
+                setLoading(true);
+                setError("");
+
+                const response = await fetch(
+                    "http://localhost:5000/api/projects"
+                );
+
+                if (!response.ok) {
+                    throw new Error("Failed to fetch projects");
+                }
+
+                const data: BackendProject[] =
+                    await response.json();
+
+                const formattedProjects: Project[] = data
+                    .map((project) => ({
+                        _id: project._id,
+                        name: project.title,
+                        description: project.description,
+                        tech: project.technologies,
+                        link: project.githubUrl,
+                        demo: project.demo || undefined,
+                        order: project.order,
+                    }))
+                    .sort(
+                        (a, b) => a.order - b.order
+                    );
+
+                setProjects(formattedProjects);
+            } catch (error) {
+                console.error(
+                    "Failed to fetch projects:",
+                    error
+                );
+
+                setError("Unable to load projects");
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchProjects();
+    }, []);
 
     return (
         <div
@@ -77,7 +117,6 @@ function FileManager({
             }}
         >
             <div className="overflow-hidden rounded-2xl border border-[#2a2a2a] bg-[#0f1115]/90 shadow-[0_0_30px_rgba(0,0,0,0.25)] backdrop-blur-sm">
-
                 {/* Title bar */}
                 <div className="border-b border-[#2a2a2a] bg-[#11151a] text-[11px] text-gray-300">
                     <div
@@ -97,27 +136,45 @@ function FileManager({
 
                     {/* Menu bar */}
                     <div className="flex items-center gap-2 border-t border-[#2a2a2a] bg-[#141b22] px-4 py-2 text-sm uppercase">
-                        <button type="button" className="rounded px-2 py-1 transition hover:bg-gray-700">
+                        <button
+                            type="button"
+                            className="rounded px-2 py-1 transition hover:bg-gray-700"
+                        >
                             File
                         </button>
 
-                        <button type="button" className="rounded px-2 py-1 transition hover:bg-gray-700">
+                        <button
+                            type="button"
+                            className="rounded px-2 py-1 transition hover:bg-gray-700"
+                        >
                             Edit
                         </button>
 
-                        <button type="button" className="rounded px-2 py-1 transition hover:bg-gray-700">
+                        <button
+                            type="button"
+                            className="rounded px-2 py-1 transition hover:bg-gray-700"
+                        >
                             View
                         </button>
 
-                        <button type="button" className="rounded px-2 py-1 transition hover:bg-gray-700">
+                        <button
+                            type="button"
+                            className="rounded px-2 py-1 transition hover:bg-gray-700"
+                        >
                             Go
                         </button>
 
-                        <button type="button" className="rounded px-2 py-1 transition hover:bg-gray-700">
+                        <button
+                            type="button"
+                            className="rounded px-2 py-1 transition hover:bg-gray-700"
+                        >
                             Bookmarks
                         </button>
 
-                        <button type="button" className="rounded px-2 py-1 transition hover:bg-gray-700">
+                        <button
+                            type="button"
+                            className="rounded px-2 py-1 transition hover:bg-gray-700"
+                        >
                             Help
                         </button>
                     </div>
@@ -125,7 +182,6 @@ function FileManager({
 
                 {/* Desktop layout */}
                 <div className="hidden min-h-[560px] lg:flex">
-
                     {/* Sidebar */}
                     <aside className="w-[220px] shrink-0 border-r border-[#2a2a2a] bg-[#121820] p-4 text-sm text-gray-300">
                         <div className="mb-4 text-[14px] font-semibold text-gray-300">
@@ -167,7 +223,6 @@ function FileManager({
 
                     {/* Main */}
                     <main className="flex min-w-0 flex-1 flex-col bg-[#0f1115] p-4">
-
                         <div className="mb-6 border-b border-[#2a2a2a] pb-3">
                             <div className="flex items-center justify-between">
                                 <div className="text-sm text-[#E6E6E6]">
@@ -175,7 +230,9 @@ function FileManager({
                                 </div>
 
                                 <div className="text-[10px] uppercase text-gray-400">
-                                    {exampleProjects.length} Folders
+                                    {loading
+                                        ? "Loading..."
+                                        : `${projects.length} Folders`}
                                 </div>
                             </div>
 
@@ -184,28 +241,44 @@ function FileManager({
                             </div>
                         </div>
 
-                        <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
-                            {exampleProjects.map((project) => (
-                                <button
-                                    type="button"
-                                    key={project.name}
-                                    onClick={() => onOpenProject(project)}
-                                    className="group flex cursor-pointer flex-col items-center justify-center rounded-xl border border-transparent p-3 text-center transition-all duration-200 hover:border-[#4FC1E9]/60 hover:bg-[#131b23] focus:border-[#4FC1E9]/60 focus:bg-[#131b23] focus:outline-none"
-                                >
-                                    <div className="relative mb-3 flex h-16 w-12 items-center justify-center">
-                                        <Folder className="h-14 w-14 text-[#4FC1E9] opacity-90 transition group-hover:opacity-100" />
-                                    </div>
+                        {loading ? (
+                            <div className="flex flex-1 items-center justify-center text-xs text-gray-500">
+                                Loading projects...
+                            </div>
+                        ) : error ? (
+                            <div className="flex flex-1 items-center justify-center text-xs text-red-400">
+                                [ ERROR ] {error}
+                            </div>
+                        ) : projects.length === 0 ? (
+                            <div className="flex flex-1 items-center justify-center text-xs text-gray-500">
+                                No projects found.
+                            </div>
+                        ) : (
+                            <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
+                                {projects.map((project) => (
+                                    <button
+                                        type="button"
+                                        key={project._id}
+                                        onClick={() =>
+                                            onOpenProject(project)
+                                        }
+                                        className="group flex cursor-pointer flex-col items-center justify-center rounded-xl border border-transparent p-3 text-center transition-all duration-200 hover:border-[#4FC1E9]/60 hover:bg-[#131b23] focus:border-[#4FC1E9]/60 focus:bg-[#131b23] focus:outline-none"
+                                    >
+                                        <div className="relative mb-3 flex h-16 w-12 items-center justify-center">
+                                            <Folder className="h-14 w-14 text-[#4FC1E9] opacity-90 transition group-hover:opacity-100" />
+                                        </div>
 
-                                    <div className="flex min-h-[2rem] w-full max-w-[110px] items-center justify-center text-center text-xs font-medium leading-4 text-[#E6E6E6] transition group-hover:text-[#4FC1E9]">
-                                        {project.name}
-                                    </div>
-                                </button>
-                            ))}
-                        </div>
+                                        <div className="flex min-h-[2rem] w-full max-w-[110px] items-center justify-center text-center text-xs font-medium leading-4 text-[#E6E6E6] transition group-hover:text-[#4FC1E9]">
+                                            {project.name}
+                                        </div>
+                                    </button>
+                                ))}
+                            </div>
+                        )}
 
                         <div className="mt-auto flex items-center justify-between border-t border-[#2a2a2a] pt-3 text-[14px] text-gray-400">
                             <span>
-                                {exampleProjects.length} Folders
+                                {projects.length} Folders
                             </span>
 
                             <span>
@@ -217,7 +290,6 @@ function FileManager({
 
                 {/* Small screen layout */}
                 <div className="flex min-h-[500px] flex-col sm:flex-row lg:hidden">
-
                     {/* Project list */}
                     <aside className="w-full shrink-0 border-b border-[#2a2a2a] bg-[#121820] p-3 sm:w-[190px] sm:border-b-0 sm:border-r md:w-[220px]">
                         <div className="mb-3 px-2 text-[11px] font-semibold tracking-[0.12em] text-gray-500">
@@ -225,36 +297,53 @@ function FileManager({
                         </div>
 
                         <div className="flex gap-1 overflow-x-auto sm:flex-col sm:overflow-x-visible">
-                            {exampleProjects.map((project) => {
-                                const isActive =
-                                    selectedProject?.name === project.name
+                            {loading ? (
+                                <div className="px-3 py-2 text-xs text-gray-500">
+                                    Loading...
+                                </div>
+                            ) : error ? (
+                                <div className="px-3 py-2 text-xs text-red-400">
+                                    Failed to load projects
+                                </div>
+                            ) : (
+                                projects.map((project) => {
+                                    const isActive =
+                                        selectedProject?.name ===
+                                        project.name;
 
-                                return (
-                                    <button
-                                        type="button"
-                                        key={project.name}
-                                        onClick={() =>
-                                            onOpenProject(project)
-                                        }
-                                        className={`min-w-max cursor-pointer rounded-md px-3 py-2 text-left text-xs transition-colors sm:w-full ${isActive ? 'bg-[#1a212b] text-[#E6E6E6]' : 'text-gray-400 hover:bg-[#171e27] hover:text-white'}`}
-                                    >
-                                        <span className="mr-2 text-[#687582]">
-                                            {isActive ? '▸' : ' '}
-                                        </span>
+                                    return (
+                                        <button
+                                            type="button"
+                                            key={project._id}
+                                            onClick={() =>
+                                                onOpenProject(
+                                                    project
+                                                )
+                                            }
+                                            className={`min-w-max cursor-pointer rounded-md px-3 py-2 text-left text-xs transition-colors sm:w-full ${
+                                                isActive
+                                                    ? "bg-[#1a212b] text-[#E6E6E6]"
+                                                    : "text-gray-400 hover:bg-[#171e27] hover:text-white"
+                                            }`}
+                                        >
+                                            <span className="mr-2 text-[#687582]">
+                                                {isActive
+                                                    ? "▸"
+                                                    : " "}
+                                            </span>
 
-                                        {project.name}
-                                    </button>
-                                )
-                            })}
+                                            {project.name}
+                                        </button>
+                                    );
+                                })
+                            )}
                         </div>
                     </aside>
 
                     {/* Project details */}
                     <main className="min-w-0 flex-1 bg-[#0f1115] p-5 sm:p-6">
-
                         {selectedProject ? (
                             <div className="flex h-full flex-col">
-
                                 <div className="mb-6 border-b border-[#2a2a2a] pb-4">
                                     <div className="text-[10px] uppercase tracking-[0.12em] text-gray-500">
                                         Project
@@ -266,7 +355,6 @@ function FileManager({
                                 </div>
 
                                 <div className="flex-1">
-
                                     <p className="max-w-2xl text-sm leading-6 text-gray-400">
                                         {selectedProject.description}
                                     </p>
@@ -290,32 +378,34 @@ function FileManager({
                                         </div>
                                     </div>
 
-                                    <div className="mt-6 flex flex-wrap gap-3">
-                                        <a
-                                            href={selectedProject.link}
-                                            target="_blank"
-                                            rel="noreferrer"
-                                            className="rounded-md border border-[#2a2a2a] bg-[#141a21] px-3 py-2 text-xs text-gray-300 transition hover:border-[#4FC1E9]/60 hover:text-[#4FC1E9]"
-                                        >
-                                            GitHub
-                                        </a>
-
+                                    <div className="mt-6 flex flex-wrap justify-center gap-3">
                                         {selectedProject.demo && (
+                                            <iframe
+                                                src={`${selectedProject.demo}?controls=0&modestbranding=1&rel=0`}
+                                                title={`${selectedProject.name} demo`}
+                                                className="aspect-video w-[75%] rounded-md border border-[#2a2a2a] bg-[#141a21]"
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            />
+                                        )}
+
+                                        {selectedProject.link && (
                                             <a
-                                                href={selectedProject.demo}
+                                                href={
+                                                    selectedProject.link
+                                                }
                                                 target="_blank"
                                                 rel="noreferrer"
-                                                className="rounded-md border border-[#2a2a2a] bg-[#141a21] px-3 py-2 text-xs text-gray-300 transition hover:border-[#4FC1E9]/60 hover:text-[#4FC1E9]"
+                                                className="mt-4 cursor-pointer rounded-md border border-[#2a2a2a] bg-[#141a21] px-7 py-2 text-xs text-gray-300 transition hover:border-[#4FC1E9]/60 hover:text-[#4FC1E9]"
                                             >
-                                                Demo
+                                                GitHub
                                             </a>
                                         )}
                                     </div>
-
                                 </div>
 
                                 <div className="mt-8 border-t border-[#2a2a2a] pt-3 text-[11px] text-gray-500">
-                                    /home/kristian/projects/{selectedProject.name}
+                                    /home/kristian/projects/
+                                    {selectedProject.name}
                                 </div>
                             </div>
                         ) : (
@@ -335,7 +425,7 @@ function FileManager({
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default FileManager

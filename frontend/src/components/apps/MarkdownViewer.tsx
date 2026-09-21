@@ -88,4 +88,4 @@ function MarkdownViewer({
     );
 }
 
-export default MarkdownViewer;
+export default MarkdownViewer
