@@ -71,8 +71,8 @@ function SkillsForm({
 
         try {
             const url = editing
-                ? `http://localhost:5000/api/skills/${skill._id}`
-                : "http://localhost:5000/api/skills";
+                ? `${import.meta.env.VITE_API_URL}/api/skills/${skill._id}`
+                : `${import.meta.env.VITE_API_URL}/api/skills`;
 
             const response = await fetch(url, {
                 method: editing ? "PUT" : "POST",

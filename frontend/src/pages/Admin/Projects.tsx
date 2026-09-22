@@ -49,7 +49,7 @@ function Projects() {
 
         try {
             const response = await fetch(
-                `http://localhost:5000/api/projects/${id}`,
+                `${import.meta.env.VITE_API_URL}/api/projects/${id}`,
                 {
                     method: "DELETE",
                     credentials: "include",

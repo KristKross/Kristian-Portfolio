@@ -79,8 +79,8 @@ function ProjectForm({
 
         try {
             const url = editing
-                ? `http://localhost:5000/api/projects/${project._id}`
-                : "http://localhost:5000/api/projects";
+                ? `${import.meta.env.VITE_API_URL}/api/projects/${project._id}`
+                : `${import.meta.env.VITE_API_URL}/api/projects`;
 
             const response = await fetch(url, {
                 method: editing ? "PUT" : "POST",
