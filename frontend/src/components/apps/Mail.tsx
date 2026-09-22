@@ -169,7 +169,7 @@ function Mail({
 								</div>
 
 								<div className="flex flex-col gap-0.5 sm:flex-row">
-									<span className="w-auto text-gray-500 sm:w-20">
+									<span className="w-auto text-gray-500 sm:w-20 text-sm sm:text-xs">
 										Subject:
 									</span>
 									<span>Let's work together!</span>
@@ -184,11 +184,11 @@ function Mail({
 							</div>
 
 							{/* Message */}
-							<div className="max-w-3xl text-base sm:text-xs md:text-sm">
+							<div className="max-w-3xl text-xl sm:text-xs md:text-sm">
 								<p>
 									Hi, I'm currently open to interesting projects,
 									collaboration and opportunities.
-								</p>
+								</p>	
 
 								<p className="mt-4">
 									If you’d like to get in touch, feel free to send me

@@ -120,7 +120,10 @@ function Contact({
                                             type="button"
                                             disabled={opened.github}
                                             onClick={() =>
-                                                openWindow("github", onOpenGithub)
+                                                openWindow(
+                                                    "github",
+                                                    onOpenGithub
+                                                )
                                             }
                                             className={
                                                 opened.github
@@ -148,6 +151,14 @@ function Contact({
                                         >
                                             linkedin
                                         </button>
+
+                                        <a
+                                            href="/cv.pdf"
+                                            download="Kristian-Demonteverde-CV.pdf"
+                                            className="cursor-pointer text-[#4FC1E9] transition-colors hover:text-white hover:underline"
+                                        >
+                                            cv.pdf
+                                        </a>
                                     </div>
                                 </div>
                             ),
@@ -176,7 +187,7 @@ function Contact({
                     className="max-w-[900px]"
                 />
             )}
-            
+
             {opened.github && (
                 <Github
                     initialX={700}

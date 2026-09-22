@@ -138,6 +138,15 @@ function MobileMenu({
                         ~/ {label.toLowerCase()}
                     </a>
                 ))}
+
+                <a
+                    href="/cv.pdf"
+                    download="Kristian-Demonteverde-CV.pdf"
+                    onClick={onClose}
+                    className="border border-transparent px-3 py-2 hover:border-[#3d7185] hover:bg-[#263743] hover:text-[#67d4e8]"
+                >
+                    ~/ cv.pdf
+                </a>
             </div>
         </div>
     );
@@ -173,7 +182,7 @@ function Navbar() {
         <header className="fixed left-0 right-0 top-0 z-[9999] border-b border-[#11161d] bg-[#1b2028] font-mono shadow-[0_2px_8px_rgba(0,0,0,0.35)]">
             <nav className="mx-auto flex h-8 w-full items-center gap-4 px-3 text-white sm:px-5">
                 <div className="flex min-w-0 flex-1 items-center gap-4">
-                    <div className="hidden lg:flex border-r border-[#46515f] pr-5 text-sm font-bold tracking-[0.04em] text-[#dce7f2]">
+                    <div className="hidden border-r border-[#46515f] pr-5 text-sm font-bold tracking-[0.04em] text-[#dce7f2] lg:flex">
                         [ kristian ]
                     </div>
 
@@ -196,6 +205,18 @@ function Navbar() {
                                     <span>{label.toLowerCase()}</span>
                                 </a>
                             ))}
+
+                            <a
+                                href="/cv.pdf"
+                                download="Kristian-Demonteverde-CV.pdf"
+                                className="relative flex h-8 shrink-0 items-center border-x border-[#11161d] bg-[#252c35] px-8 text-sm text-[#c5ced8] shadow-[inset_0_1px_0_rgba(255,255,255,0.04),inset_0_-1px_0_rgba(0,0,0,0.35)] transition-colors hover:bg-[#303943] hover:text-white focus:outline-none focus-visible:z-10 focus-visible:border-[#67d4e8] focus-visible:text-white"
+                            >
+                                <span className="mr-2 text-[#687582]">
+                                    ▸
+                                </span>
+
+                                <span>cv.pdf</span>
+                            </a>
                         </div>
                     </div>
 
@@ -244,4 +265,4 @@ function Navbar() {
     );
 }
 
-export default Navbar
+export default Navbar;
