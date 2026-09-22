@@ -47,7 +47,7 @@ function Terminal({
                 draggableRef.current = element;
             }}
             onPointerDown={onFocus}
-            className={`window-pop-in relative flex w-full max-w-2xl flex-col rounded-lg bg-[#202837] p-4 font-mono text-xs text-white shadow-lg sm:text-sm lg:absolute lg:my-4 lg:flex lg:text-base ${className ?? ""}`}
+            className={`window-pop-in hidden lg:flex relative flex w-full max-w-2xl flex-col rounded-lg bg-[#202837] p-4 font-mono text-xs text-white shadow-lg sm:text-sm lg:absolute lg:my-4 lg:text-base ${className ?? ""}`}
             style={{
                 ...(isDesktop && {
                     left: position.x,

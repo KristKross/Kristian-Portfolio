@@ -105,10 +105,10 @@ function ScrollPrompt() {
 
 function Landing({ windowZIndexes, bringToFront }: LandingProps) {
     const { sectionRef, visible } = useSectionAppearance([
-        300,
+        200,
         1000,
-        1700,
-        1700,
+        1200,
+        1200,
     ])
 
     return (

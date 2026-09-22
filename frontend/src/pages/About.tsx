@@ -74,7 +74,7 @@ const AboutContent = (
 );
 
 function About({ windowZIndexes, bringToFront }: AboutProps) {
-    const { sectionRef, visible } = useSectionAppearance([300, 1000]);
+    const { sectionRef, visible } = useSectionAppearance([300, 500]);
 
     return (
         <section

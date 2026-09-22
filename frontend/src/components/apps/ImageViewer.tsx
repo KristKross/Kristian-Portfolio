@@ -62,7 +62,7 @@ function ImageViewer({
             </div>
 
             {/* Main Content Area */}
-            <div className="flex min-h-[500px] items-center justify-center overflow-hidden bg-gray-900 p-8">
+            <div className="flex items-center justify-center overflow-hidden bg-gray-900 p-8">
                 <img src={image} alt="Profile" className="max-h-[calc(100vh-200px)] max-w-full object-contain" />
             </div>
         </div>

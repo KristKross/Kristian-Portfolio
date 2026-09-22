@@ -40,7 +40,7 @@ function Projects({ windowZIndexes, bringToFront }: ProjectsProps) {
         <section
             ref={sectionRef}
             id="projects"
-            className="relative mt-8 flex flex-col items-center justify-center gap-6 px-2 min-h-screen"
+            className="relative flex flex-col items-center justify-center gap-6 px-2 mt-8 lg:mt-0 lg:min-h-screen"
         >
             {visible[0] && (
                 <Terminal

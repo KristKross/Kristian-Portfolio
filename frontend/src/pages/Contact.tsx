@@ -71,7 +71,7 @@ function Contact({
         <section
             ref={sectionRef}
             id="contact"
-            className="relative flex min-h-screen flex-col items-center justify-center gap-6 px-2 lg:mt-0 lg:block"
+            className="relative flex min-h-screen flex-col items-center justify-center gap-6 px-2 mt-8 lg:mt-0 lg:block"
         >
             {visible[0] && (
                 <Terminal
@@ -176,6 +176,21 @@ function Contact({
                     className="max-w-[900px]"
                 />
             )}
+            
+            {opened.github && (
+                <Github
+                    initialX={700}
+                    initialY={40}
+                    zIndex={windowZIndexes.github}
+                    onFocus={() => bringToFront("github")}
+                    onClose={() =>
+                        setOpened((previous) => ({
+                            ...previous,
+                            github: false,
+                        }))
+                    }
+                />
+            )}
 
             {opened.linkedin && (
                 <Linkedin
@@ -187,21 +202,6 @@ function Contact({
                         setOpened((previous) => ({
                             ...previous,
                             linkedin: false,
-                        }))
-                    }
-                />
-            )}
-
-            {opened.github && (
-                <Github
-                    initialX={700}
-                    initialY={40}
-                    zIndex={windowZIndexes.github}
-                    onFocus={() => bringToFront("github")}
-                    onClose={() =>
-                        setOpened((previous) => ({
-                            ...previous,
-                            github: false,
                         }))
                     }
                 />

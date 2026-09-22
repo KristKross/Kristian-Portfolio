@@ -100,7 +100,7 @@ function FileManager({
         <div
             ref={draggableRef}
             onPointerDown={onFocus}
-            className={`window-pop-in relative flex w-full max-w-[1100px] flex-col px-2 pb-4 sm:px-3 sm:pb-6 md:px-4 lg:absolute lg:m-4 lg:px-6 lg:pb-8 ${className}`}
+            className={`window-pop-in relative flex w-full max-w-[1100px] flex-col lg:absolute ${className}`}
             style={{
                 ...(isDesktop && {
                     left: position.x,

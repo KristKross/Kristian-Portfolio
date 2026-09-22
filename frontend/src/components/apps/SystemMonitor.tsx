@@ -106,7 +106,7 @@ function SystemMonitor({
         <div
             ref={draggableRef}
             onPointerDown={onFocus}
-            className={`window-pop-in relative flex w-full max-w-[920px] flex-col px-2 pb-5 sm:px-3 sm:pb-7 md:px-4 lg:absolute lg:m-4 lg:px-6 lg:pb-8 ${className}`}
+            className={`window-pop-in relative flex w-full max-w-[920px] flex-col lg:absolute lg:m-4 lg:px-6 lg:pb-8 ${className}`}
             style={{
                 ...(isDesktop && {
                     left: position.x,
