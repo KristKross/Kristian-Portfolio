@@ -173,7 +173,7 @@ function Navbar() {
         <header className="fixed left-0 right-0 top-0 z-[9999] border-b border-[#11161d] bg-[#1b2028] font-mono shadow-[0_2px_8px_rgba(0,0,0,0.35)]">
             <nav className="mx-auto flex h-8 w-full items-center gap-4 px-3 text-white sm:px-5">
                 <div className="flex min-w-0 flex-1 items-center gap-4">
-                    <div className="shrink-0 border-r border-[#46515f] pr-5 text-sm font-bold tracking-[0.04em] text-[#dce7f2]">
+                    <div className="hidden lg:flex border-r border-[#46515f] pr-5 text-sm font-bold tracking-[0.04em] text-[#dce7f2]">
                         [ kristian ]
                     </div>
 
