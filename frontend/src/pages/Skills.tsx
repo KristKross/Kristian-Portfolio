@@ -15,7 +15,7 @@ function Skills({ windowZIndexes, bringToFront }: SkillsProps) {
         <section
             ref={sectionRef}
             id="skills"
-            className="relative mt-8 flex flex-col items-center justify-center gap-6 px-2 min-h-screen"
+            className="relative pt-8 flex flex-col items-center justify-center gap-6 px-2 min-h-screen"
         >
             {visible[0] && (
                 <Terminal

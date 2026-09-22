@@ -115,7 +115,7 @@ function Landing({ windowZIndexes, bringToFront }: LandingProps) {
         <section
             ref={sectionRef}
             id="landing"
-            className="relative mt-8 flex flex-col items-center justify-center gap-6 px-2 lg:min-h-[calc(100vh-20px)]"
+            className="relative pt-8 flex flex-col items-center justify-center gap-6 px-2 lg:min-h-[calc(100vh-20px)]"
         >
             {visible[0] && (
                 <Terminal

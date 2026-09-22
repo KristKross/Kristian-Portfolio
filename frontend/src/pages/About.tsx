@@ -80,7 +80,7 @@ function About({ windowZIndexes, bringToFront }: AboutProps) {
         <section
             ref={sectionRef}
             id="about"
-            className="relative mt-8 flex min-h-screen flex-col items-center justify-center gap-6 px-2"
+            className="relative pt-8 flex min-h-screen flex-col items-center justify-center gap-6 px-2"
         >
             {visible[0] && (
                 <Terminal

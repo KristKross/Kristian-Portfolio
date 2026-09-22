@@ -71,7 +71,7 @@ function Contact({
         <section
             ref={sectionRef}
             id="contact"
-            className="relative flex min-h-screen flex-col items-center justify-center gap-6 px-2 mt-8 lg:mt-0 lg:block"
+            className="relative flex min-h-screen flex-col items-center justify-center gap-6 px-2 pt-8 lg:mt-0 lg:block"
         >
             {visible[0] && (
                 <Terminal
