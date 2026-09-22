@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import WindowsControl from "../desktop/WindowControls";
 import useDraggable from "../../hooks/useDraggable";
+import ProjectContent from "../content/ProjectContent";
 
 export interface Project {
     _id: string;
@@ -117,7 +118,6 @@ function FileManager({
             }}
         >
             <div className="overflow-hidden rounded-xl border border-[#2a2a2a] bg-[#0f1115]/90 shadow-[0_0_30px_rgba(0,0,0,0.25)] backdrop-blur-sm sm:rounded-2xl">
-
                 {/* Title bar */}
                 <div className="border-b border-[#2a2a2a] bg-[#11151a] text-[10px] text-gray-300 sm:text-[11px]">
                     <div
@@ -127,10 +127,7 @@ function FileManager({
                         className="relative flex select-none items-center justify-center px-3 py-2 sm:px-4 sm:py-2.5 lg:cursor-grab"
                     >
                         <div className="flex items-center gap-2 text-xs font-semibold text-[#e6e6e6] sm:text-sm">
-                            <FolderOpen
-                                size={15}
-                                strokeWidth={1.8}
-                            />
+                            <FolderOpen size={15} strokeWidth={1.8} />
                             File Manager
                         </div>
 
@@ -162,35 +159,19 @@ function FileManager({
 
                 {/* Desktop layout */}
                 <div className="hidden min-h-[560px] lg:flex">
-
-                    {/* Sidebar */}
                     <aside className="w-[220px] shrink-0 border-r border-[#2a2a2a] bg-[#121820] p-4 text-sm text-gray-300">
                         <div className="mb-4 text-[14px] font-semibold text-gray-300">
                             Places
                         </div>
 
                         <div className="mt-2 space-y-2 text-gray-400">
-                            <div className="px-2 py-1">
-                                Computer
-                            </div>
-
-                            <div className="px-2 py-1">
-                                kristian
-                            </div>
-
-                            <div className="px-2 py-1">
-                                Documents
-                            </div>
-
-                            <div className="px-2 py-1">
-                                Downloads
-                            </div>
+                            <div className="px-2 py-1">Computer</div>
+                            <div className="px-2 py-1">kristian</div>
+                            <div className="px-2 py-1">Documents</div>
+                            <div className="px-2 py-1">Downloads</div>
 
                             <div className="flex items-center gap-2 rounded-md bg-[#1a212b] px-2 py-1.5 text-[#E6E6E6]">
-                                <Folder
-                                    size={15}
-                                    strokeWidth={1.7}
-                                />
+                                <Folder size={15} strokeWidth={1.7} />
                                 Projects
                             </div>
                         </div>
@@ -201,19 +182,13 @@ function FileManager({
 
                         <div className="mt-2 space-y-2 text-gray-400">
                             <div className="flex items-center gap-2 px-2 py-1">
-                                <HardDrive
-                                    size={15}
-                                    strokeWidth={1.7}
-                                />
+                                <HardDrive size={15} strokeWidth={1.7} />
                                 File System
                             </div>
                         </div>
                     </aside>
 
-                    {/* Main */}
                     <main className="flex min-w-0 flex-1 flex-col bg-[#0f1115]">
-
-                        {/* Navigation bar */}
                         <div className="flex items-center gap-2 border-b border-[#2a2a2a] bg-[#151a20] px-3 py-2.5">
                             <button
                                 type="button"
@@ -238,9 +213,7 @@ function FileManager({
                             </div>
                         </div>
 
-                        {/* Folder contents */}
                         <div className="flex flex-1 flex-col p-4">
-
                             <div className="mb-6 flex items-center justify-between border-b border-[#2a2a2a] pb-3">
                                 <div>
                                     <div className="text-sm text-[#E6E6E6]">
@@ -297,22 +270,15 @@ function FileManager({
                                 </div>
                             )}
 
-                            {/* Status bar */}
                             <div className="mt-auto flex items-center justify-between border-t border-[#2a2a2a] pt-3 text-[10px] text-gray-500">
                                 <div className="flex items-center gap-1.5">
-                                    <Folder
-                                        size={11}
-                                        strokeWidth={1.7}
-                                    />
-
+                                    <Folder size={11} strokeWidth={1.7} />
                                     <span>
                                         {projects.length} folders
                                     </span>
                                 </div>
 
-                                <span>
-                                    Free space 2.1 GiB
-                                </span>
+                                <span>Free space 2.1 GiB</span>
                             </div>
                         </div>
                     </main>
@@ -320,8 +286,6 @@ function FileManager({
 
                 {/* Small screen layout */}
                 <div className="flex min-h-[420px] flex-col sm:min-h-[460px] sm:flex-row lg:hidden">
-
-                    {/* Project list */}
                     <aside className="w-full shrink-0 border-b border-[#2a2a2a] bg-[#121820] p-2.5 sm:w-[170px] sm:border-b-0 sm:border-r sm:p-3 md:w-[190px] md:p-4">
                         <div className="mb-2 px-2 text-[10px] font-semibold tracking-[0.12em] text-gray-500 sm:mb-3">
                             PROJECTS
@@ -339,8 +303,7 @@ function FileManager({
                             ) : (
                                 projects.map((project) => {
                                     const isActive =
-                                        selectedProject?._id ===
-                                        project._id;
+                                        selectedProject?._id === project._id;
 
                                     return (
                                         <button
@@ -379,97 +342,9 @@ function FileManager({
                         </div>
                     </aside>
 
-                    {/* Project details */}
                     <main className="min-w-0 flex-1 bg-[#0f1115] p-3.5 sm:p-5 md:p-6">
                         {selectedProject ? (
-                            <div className="flex h-full flex-col">
-
-                                {/* Project path */}
-                                <div className="mb-4 border-b border-[#2a2a2a] pb-3 sm:mb-5 sm:pb-4 md:mb-6">
-                                    <div className="flex items-center gap-2 text-[9px] text-gray-500 sm:text-[10px]">
-                                        <FolderOpen
-                                            size={12}
-                                            strokeWidth={1.7}
-                                        />
-
-                                        <span className="truncate">
-                                            /home/kristian/projects/
-                                            {selectedProject.name}
-                                        </span>
-                                    </div>
-
-                                    <h2 className="mt-2 break-words text-lg font-semibold text-[#E6E6E6] sm:text-xl md:text-xl">
-                                        {selectedProject.name}
-                                    </h2>
-                                </div>
-
-                                <div className="flex-1">
-
-                                    <p className="max-w-2xl text-xs leading-5 text-gray-400 sm:text-sm sm:leading-6">
-                                        {selectedProject.description}
-                                    </p>
-
-                                    <div className="mt-4 sm:mt-5 md:mt-6">
-                                        <div className="mb-2 flex items-center gap-2 text-[9px] uppercase tracking-[0.12em] text-gray-500 sm:text-[10px]">
-                                            <HardDrive
-                                                size={12}
-                                                strokeWidth={1.7}
-                                            />
-                                            Technologies
-                                        </div>
-
-                                        <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                                            {selectedProject.tech.map(
-                                                (tech) => (
-                                                    <span
-                                                        key={tech}
-                                                        className="rounded-md border border-[#2a2a2a] bg-[#141a21] px-2 py-0.5 text-[10px] text-gray-300 sm:px-2.5 sm:py-1 sm:text-xs"
-                                                    >
-                                                        {tech}
-                                                    </span>
-                                                )
-                                            )}
-                                        </div>
-                                    </div>
-
-                                    <div className="mt-5 flex flex-col items-center justify-center gap-2 sm:mt-6 sm:gap-3">
-
-                                        {selectedProject.demo && (
-                                            <iframe
-                                                src={`${selectedProject.demo}?controls=0&modestbranding=1&rel=0`}
-                                                title={`${selectedProject.name} demo`}
-                                                className="aspect-video w-full max-w-[520px] rounded-md border border-[#2a2a2a] bg-[#141a21] sm:w-[85%] md:w-[80%]"
-                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                            />
-                                        )}
-
-                                        {selectedProject.link && (
-                                            <a
-                                                href={selectedProject.link}
-                                                target="_blank"
-                                                rel="noreferrer"
-                                                className="mt-2 shrink-0 rounded-md bg-[#4FC1E9] px-5 py-1.5 text-center text-[10px] font-semibold text-[#10151a] transition hover:brightness-110 sm:px-6 sm:py-2 sm:text-xs"
-                                            >
-                                                GitHub
-                                            </a>
-                                        )}
-                                    </div>
-                                </div>
-
-                                <div className="mt-5 flex items-center justify-between border-t border-[#2a2a2a] pt-2.5 text-[9px] text-gray-500 sm:mt-7 sm:pt-3 sm:text-[11px]">
-                                    <div className="flex items-center gap-1.5">
-                                        <Folder
-                                            size={11}
-                                            strokeWidth={1.7}
-                                        />
-                                        Project folder
-                                    </div>
-
-                                    <span className="truncate">
-                                        /home/kristian/projects
-                                    </span>
-                                </div>
-                            </div>
+                            <ProjectContent project={selectedProject} />
                         ) : (
                             <div className="flex h-full min-h-[350px] items-center justify-center text-center sm:min-h-[420px]">
                                 <div>
@@ -496,4 +371,4 @@ function FileManager({
     );
 }
 
-export default FileManager
+export default FileManager;
