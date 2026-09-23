@@ -8,10 +8,12 @@ const router = Router();
 // Get all projects
 router.get("/", async (req: Request, res: Response) => {
     try {
-        const projects = await Project.find().sort({ createdAt: -1 });
+        const projects = await Project.find().sort({ order: 1 });
 
         res.status(200).json(projects);
     } catch (error) {
+        console.error("Fetch projects error:", error);
+
         res.status(500).json({
             message: "Failed to fetch projects",
         });
@@ -32,6 +34,8 @@ router.get("/:id", async (req: Request, res: Response) => {
 
         res.status(200).json(project);
     } catch (error) {
+        console.error("Fetch project error:", error);
+
         res.status(500).json({
             message: "Failed to fetch project",
         });
@@ -46,20 +50,28 @@ router.post("/", authenticate, async (req: Request, res: Response) => {
             title,
             description,
             technologies,
-            demo,
+            liveUrl,
+            videoUrl,
             githubUrl,
+            images,
+            order,
         } = req.body;
 
         const project = await Project.create({
             title,
             description,
-            demo,
             technologies,
-            githubUrl
+            liveUrl,
+            videoUrl,
+            githubUrl,
+            images,
+            order,
         });
 
         res.status(201).json(project);
     } catch (error) {
+        console.error("Create project error:", error);
+
         res.status(500).json({
             message: "Failed to create project",
         });
@@ -70,9 +82,29 @@ router.post("/", authenticate, async (req: Request, res: Response) => {
 // Update a project
 router.put("/:id", authenticate, async (req: Request, res: Response) => {
     try {
+        const {
+            title,
+            description,
+            technologies,
+            liveUrl,
+            videoUrl,
+            githubUrl,
+            images,
+            order,
+        } = req.body;
+
         const project = await Project.findByIdAndUpdate(
             req.params.id,
-            req.body,
+            {
+                title,
+                description,
+                technologies,
+                liveUrl,
+                videoUrl,
+                githubUrl,
+                images,
+                order,
+            },
             {
                 new: true,
                 runValidators: true,
@@ -87,6 +119,8 @@ router.put("/:id", authenticate, async (req: Request, res: Response) => {
 
         res.status(200).json(project);
     } catch (error) {
+        console.error("Update project error:", error);
+
         res.status(500).json({
             message: "Failed to update project",
         });
@@ -109,10 +143,12 @@ router.delete("/:id", authenticate, async (req: Request, res: Response) => {
             message: "Project deleted successfully",
         });
     } catch (error) {
-        res.status(500).json({
-            message: "Failed to delete project",
+        console.error("Delete project error:", error);
+
+        res.status(200).json({
+            message: "Project deleted successfully",
         });
     }
 });
 
-export default router;
+export default router

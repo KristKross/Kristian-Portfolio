@@ -19,7 +19,13 @@ const projectSchema = new mongoose.Schema(
             default: [],
         },
 
-        demo: {
+        liveUrl: {
+            type: String,
+            default: "",
+            trim: true,
+        },
+
+        videoUrl: {
             type: String,
             default: "",
             trim: true,
@@ -29,6 +35,11 @@ const projectSchema = new mongoose.Schema(
             type: String,
             default: "",
             trim: true,
+        },
+
+        images: {
+            type: [String],
+            default: [],
         },
 
         order: {
@@ -43,4 +54,4 @@ const projectSchema = new mongoose.Schema(
 
 const Project = mongoose.model("Project", projectSchema);
 
-export default Project;
+export default Project

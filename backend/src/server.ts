@@ -1,14 +1,14 @@
+import "dotenv/config";
+
 import express from "express";
-import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 
-import { connectDB } from "./db";
+import { connectDB } from "./config/db";
 import authRoutes from "./routes/authRoute";
 import projectRoutes from "./routes/projectRoute";
 import skillRoutes from "./routes/skillRoute";
-
-dotenv.config();
+import uploadRoutes from "./routes/uploadRoute";
 
 const app = express();
 
@@ -27,6 +27,7 @@ connectDB();
 app.use("/api/auth", authRoutes);
 app.use("/api/projects", projectRoutes);
 app.use("/api/skills", skillRoutes);
+app.use("/api/upload", uploadRoutes);
 
 const PORT = process.env.PORT || 5000;
 

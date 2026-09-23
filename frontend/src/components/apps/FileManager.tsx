@@ -12,22 +12,13 @@ import ProjectContent from "../content/ProjectContent";
 
 export interface Project {
     _id: string;
-    name: string;
-    description: string;
-    tech: string[];
-    link: string;
-    demo?: string;
-    images?: string[];
-    order: number;
-}
-
-interface BackendProject {
-    _id: string;
     title: string;
     description: string;
     technologies: string[];
-    demo: string;
+    liveUrl: string;
+    videoUrl: string;
     githubUrl: string;
+    images: string[];
     order: number;
 }
 
@@ -78,23 +69,19 @@ function FileManager({
                     throw new Error("Failed to fetch projects");
                 }
 
-                const data: BackendProject[] = await response.json();
+                const data: Project[] = await response.json();
 
-                const formattedProjects: Project[] = data
-                    .map((project) => ({
-                        _id: project._id,
-                        name: project.title,
-                        description: project.description,
-                        tech: project.technologies,
-                        link: project.githubUrl,
-                        demo: project.demo || undefined,
-                        order: project.order,
-                    }))
+                const sortedProjects = data
+                    .slice()
                     .sort((a, b) => a.order - b.order);
 
-                setProjects(formattedProjects);
+                setProjects(sortedProjects);
             } catch (error) {
-                console.error("Failed to fetch projects:", error);
+                console.error(
+                    "Failed to fetch projects:",
+                    error
+                );
+
                 setError("Unable to load projects");
             } finally {
                 setLoading(false);
@@ -127,7 +114,10 @@ function FileManager({
                         className="relative flex select-none items-center justify-center px-3 py-2 sm:px-4 sm:py-2.5 lg:cursor-grab"
                     >
                         <div className="flex items-center gap-2 text-xs font-semibold text-[#e6e6e6] sm:text-sm">
-                            <FolderOpen size={15} strokeWidth={1.8} />
+                            <FolderOpen
+                                size={15}
+                                strokeWidth={1.8}
+                            />
                             File Manager
                         </div>
 
@@ -165,13 +155,27 @@ function FileManager({
                         </div>
 
                         <div className="mt-2 space-y-2 text-gray-400">
-                            <div className="px-2 py-1">Computer</div>
-                            <div className="px-2 py-1">kristian</div>
-                            <div className="px-2 py-1">Documents</div>
-                            <div className="px-2 py-1">Downloads</div>
+                            <div className="px-2 py-1">
+                                Computer
+                            </div>
+
+                            <div className="px-2 py-1">
+                                kristian
+                            </div>
+
+                            <div className="px-2 py-1">
+                                Documents
+                            </div>
+
+                            <div className="px-2 py-1">
+                                Downloads
+                            </div>
 
                             <div className="flex items-center gap-2 rounded-md bg-[#1a212b] px-2 py-1.5 text-[#E6E6E6]">
-                                <Folder size={15} strokeWidth={1.7} />
+                                <Folder
+                                    size={15}
+                                    strokeWidth={1.7}
+                                />
                                 Projects
                             </div>
                         </div>
@@ -182,7 +186,10 @@ function FileManager({
 
                         <div className="mt-2 space-y-2 text-gray-400">
                             <div className="flex items-center gap-2 px-2 py-1">
-                                <HardDrive size={15} strokeWidth={1.7} />
+                                <HardDrive
+                                    size={15}
+                                    strokeWidth={1.7}
+                                />
                                 File System
                             </div>
                         </div>
@@ -263,7 +270,7 @@ function FileManager({
                                             </div>
 
                                             <div className="flex min-h-[2rem] w-full max-w-[110px] items-center justify-center text-center text-xs font-medium leading-4 text-[#E6E6E6] transition group-hover:text-[#4FC1E9]">
-                                                {project.name}
+                                                {project.title}
                                             </div>
                                         </button>
                                     ))}
@@ -272,7 +279,11 @@ function FileManager({
 
                             <div className="mt-auto flex items-center justify-between border-t border-[#2a2a2a] pt-3 text-[10px] text-gray-500">
                                 <div className="flex items-center gap-1.5">
-                                    <Folder size={11} strokeWidth={1.7} />
+                                    <Folder
+                                        size={11}
+                                        strokeWidth={1.7}
+                                    />
+
                                     <span>
                                         {projects.length} folders
                                     </span>
@@ -303,7 +314,8 @@ function FileManager({
                             ) : (
                                 projects.map((project) => {
                                     const isActive =
-                                        selectedProject?._id === project._id;
+                                        selectedProject?._id ===
+                                        project._id;
 
                                     return (
                                         <button
@@ -333,7 +345,7 @@ function FileManager({
                                             )}
 
                                             <span className="truncate">
-                                                {project.name}
+                                                {project.title}
                                             </span>
                                         </button>
                                     );
@@ -344,7 +356,9 @@ function FileManager({
 
                     <main className="min-w-0 flex-1 bg-[#0f1115] p-3.5 sm:p-5 md:p-6">
                         {selectedProject ? (
-                            <ProjectContent project={selectedProject} />
+                            <ProjectContent
+                                project={selectedProject}
+                            />
                         ) : (
                             <div className="flex h-full min-h-[350px] items-center justify-center text-center sm:min-h-[420px]">
                                 <div>
@@ -359,7 +373,8 @@ function FileManager({
                                     </div>
 
                                     <div className="mt-1 text-[9px] text-gray-600 sm:text-[11px]">
-                                        Open a project folder to view its contents
+                                        Open a project folder to view its
+                                        contents
                                     </div>
                                 </div>
                             </div>
@@ -371,4 +386,4 @@ function FileManager({
     );
 }
 
-export default FileManager;
+export default FileManager

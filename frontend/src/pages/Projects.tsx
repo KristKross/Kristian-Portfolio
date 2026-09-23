@@ -20,7 +20,7 @@ function Projects({ windowZIndexes, bringToFront }: ProjectsProps) {
         setSelectedProject(project)
 
         setOpenedProjects((current) => {
-            if (current.some((item) => item.name === project.name)) {
+            if (current.some((item) => item._id === project._id)) {
                 return current
             }
 
@@ -32,7 +32,7 @@ function Projects({ windowZIndexes, bringToFront }: ProjectsProps) {
 
     const closeProject = (project: Project) => {
         setOpenedProjects((current) =>
-            current.filter((item) => item.name !== project.name)
+            current.filter((item) => item._id !== project._id)
         )
     }
 
@@ -81,7 +81,7 @@ function Projects({ windowZIndexes, bringToFront }: ProjectsProps) {
 
             {openedProjects.map((project, index) => (
                 <ProjectWindow
-                    key={project.name}
+                    key={project._id}
                     project={project}
                     initialX={400 + index * 40}
                     initialY={50 + index * 40}

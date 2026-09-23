@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 import bcrypt from "bcryptjs";
 import readline from "readline";
 
-import { connectDB } from "./db";
+import { connectDB } from "./config/db";
 import Admin from "../models/Admin";
 
 dotenv.config();

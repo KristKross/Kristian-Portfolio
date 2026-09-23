@@ -16,7 +16,7 @@ function Projects() {
             setLoading(true);
 
             const response = await fetch(
-                "http://localhost:5000/api/projects"
+                `${import.meta.env.VITE_API_URL}/api/projects`
             );
 
             if (!response.ok) {
@@ -126,11 +126,12 @@ function Projects() {
 
             {/* Project table */}
             <div className="overflow-hidden border border-[#3A4656]">
-                <div className="grid grid-cols-[3fr_2fr_1fr_1fr_1.5fr] border-b border-[#3A4656] bg-[#202837] px-4 py-3 text-xs text-[#8D99A8]">
+                <div className="grid grid-cols-[3fr_2fr_1fr_1fr_1fr_1.5fr] border-b border-[#3A4656] bg-[#202837] px-4 py-3 text-xs text-[#8D99A8]">
                     <span>PROJECT</span>
                     <span>TECHNOLOGIES</span>
                     <span>ORDER</span>
-                    <span>DEMO</span>
+                    <span>LIVE</span>
+                    <span>VIDEO</span>
                     <span>ACTIONS</span>
                 </div>
 
@@ -146,7 +147,7 @@ function Projects() {
                     sortedProjects.map((project) => (
                         <div
                             key={project._id}
-                            className="grid grid-cols-[3fr_2fr_1fr_1fr_1.5fr] items-center border-b border-[#2A3442] px-4 py-4 text-xs last:border-b-0"
+                            className="grid grid-cols-[3fr_2fr_1fr_1fr_1fr_1.5fr] items-center border-b border-[#2A3442] px-4 py-4 text-xs last:border-b-0"
                         >
                             <span>{project.title}</span>
 
@@ -163,12 +164,22 @@ function Projects() {
 
                             <span
                                 className={
-                                    project.demo
+                                    project.liveUrl
                                         ? "text-[#6F9D62]"
                                         : "text-[#536071]"
                                 }
                             >
-                                {project.demo ? "Yes" : "No"}
+                                {project.liveUrl ? "Yes" : "No"}
+                            </span>
+
+                            <span
+                                className={
+                                    project.videoUrl
+                                        ? "text-[#6F9D62]"
+                                        : "text-[#536071]"
+                                }
+                            >
+                                {project.videoUrl ? "Yes" : "No"}
                             </span>
 
                             <div className="flex gap-3">
