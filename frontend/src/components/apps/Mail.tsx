@@ -184,7 +184,7 @@ function Mail({
 							</div>
 
 							{/* Message */}
-							<div className="max-w-3xl text-xl sm:text-xs md:text-sm">
+							<div className="max-w-3xl text-xs md:text-sm lg:text-xl">
 								<p>
 									Hi, I'm currently open to interesting projects,
 									collaboration and opportunities.
