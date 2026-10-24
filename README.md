@@ -1,5 +1,3 @@
-# Kristian Demonteverde — Portfolio
-
 A personal developer portfolio built as an interactive Linux-inspired desktop environment. It showcases my projects, technical skills, background, and contact information through a collection of interactive windows and applications.
 
 ## About
